@@ -56,6 +56,19 @@ Nếu bạn muốn thêm/sửa/xóa link ngay trên điện thoại mà **không
 - **Cột `highlight`**: `TRUE` (sẽ có viền phát sáng gradient và badge HOT).
 - **Cột `active`**: `TRUE` để hiển thị, `FALSE` để ẩn link tạm thời.
 
+### 🖼️ Cập nhật Avatar trực tiếp từ Google Sheet:
+Bạn (hoặc khách) có thể đổi avatar bất cứ lúc nào bằng cách thêm 1 hàng đặc biệt vào Sheet:
+| id | title | subtitle | url | icon | category | highlight | pinned | active |
+|:---|:---|:---|:---|:---|:---|:---|:---|:---|
+| **avatar** | Ảnh đại diện | | **https://link-anh.com/avatar.jpg** | | | | | TRUE |
+
+> 💡 **Hỗ trợ cả link Google Drive!** Bạn chỉ cần dán link chia sẻ Google Drive (dạng `https://drive.google.com/file/d/.../view`), hệ thống sẽ tự động chuyển đổi sang link ảnh hiển thị tốc độ cao.
+
+#### 📐 Kích thước Avatar tối ưu nhất:
+- **Tỉ lệ**: Vuông `1:1` (chuẩn 500x500 px hoặc 800x800 px).
+- **Định dạng**: `.webp`, `.png` hoặc `.jpg`.
+- **Dung lượng**: Dưới 1MB để tải nhanh nhất.
+
 ### Bước 2: Chia sẻ công khai
 - Bấm nút **Chia sẻ (Share)** ở góc trên bên phải Google Sheet.
 - Chuyển quyền truy cập chung thành: **Bất kỳ ai có đường liên kết đều có thể xem (Anyone with the link can view)**.
