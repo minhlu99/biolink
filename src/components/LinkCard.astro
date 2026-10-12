@@ -1,0 +1,81 @@
+---
+import type { LinkItem } from '../lib/types';
+
+interface Props {
+  link: LinkItem;
+}
+
+const { link } = Astro.props;
+
+// SVG icons mapping for common link categories
+const iconMap: Record<string, string> = {
+  rocket: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />`,
+  github: `<path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />`,
+  book: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />`,
+  calendar: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />`,
+  coffee: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8zM6 1v3M10 1v3M14 1v3" />`,
+  code: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />`,
+  globe: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />`,
+  link: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />`
+};
+
+const iconSvg = iconMap[link.icon || 'link'] || iconMap.link;
+const isFillOnly = link.icon === 'github';
+---
+
+<a
+  href={link.url}
+  target="_blank"
+  rel="noopener noreferrer"
+  class={`group relative flex items-center justify-between p-4 rounded-2xl w-full transition-all duration-300 active:scale-[0.98] ${
+    link.highlight
+      ? 'highlight-border bg-slate-900/80 shadow-glow-cyan'
+      : 'glass-panel glass-panel-hover'
+  }`}
+>
+  <div class="flex items-center gap-3.5 min-w-0 pr-3">
+    <!-- Icon Container -->
+    <div
+      class={`flex-shrink-0 w-11 h-11 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110 shadow-sm ${
+        link.highlight
+          ? 'bg-gradient-to-br from-cyan-500/20 to-indigo-500/30 text-cyan-400 border border-cyan-400/30'
+          : 'bg-white/[0.05] text-slate-300 border border-white/10 group-hover:text-cyan-400'
+      }`}
+    >
+      <svg
+        class="w-5 h-5"
+        viewBox="0 0 24 24"
+        fill={isFillOnly ? 'currentColor' : 'none'}
+        stroke={isFillOnly ? 'none' : 'currentColor'}
+        set:html={iconSvg}
+      />
+    </div>
+
+    <!-- Text info -->
+    <div class="min-w-0 text-left">
+      <div class="flex items-center gap-2">
+        <h3 class="text-sm sm:text-base font-semibold text-white truncate group-hover:text-cyan-300 transition-colors">
+          {link.title}
+        </h3>
+        {link.highlight && (
+          <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-gradient-to-r from-cyan-500 to-indigo-500 text-white shadow-sm animate-pulse-subtle">
+            Hot
+          </span>
+        )}
+      </div>
+
+      {link.subtitle && (
+        <p class="text-xs text-slate-400 truncate mt-0.5 group-hover:text-slate-300 transition-colors">
+          {link.subtitle}
+        </p>
+      )}
+    </div>
+  </div>
+
+  <!-- Arrow Right Indicator -->
+  <div class="flex-shrink-0 text-slate-400 group-hover:text-cyan-400 transition-all duration-300 transform group-hover:translate-x-1 group-hover:-translate-y-0.5">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+    </svg>
+  </div>
+</a>
