@@ -17,10 +17,16 @@
 </div>
 
 <script>
+  import { translations, type Language } from '../lib/i18n';
+
   const shareBtn = document.getElementById('btn-share-bio');
   const toast = document.getElementById('toast-notification');
   const toastMsg = document.getElementById('toast-message');
   let timeoutId: number | undefined;
+
+  function getLang(): Language {
+    return (document.documentElement.lang as Language) || 'vi';
+  }
 
   function showToast(message: string) {
     if (!toast || !toastMsg) return;
@@ -54,11 +60,12 @@
   });
 
   async function copyToClipboard(text: string) {
+    const lang = getLang();
     try {
       await navigator.clipboard.writeText(text);
-      showToast('Đã sao chép liên kết vào bộ nhớ tạm!');
+      showToast(translations[lang].copied);
     } catch {
-      showToast('Không thể sao chép, vui lòng sao chép thủ công.');
+      showToast(translations[lang].copyFailed);
     }
   }
 </script>

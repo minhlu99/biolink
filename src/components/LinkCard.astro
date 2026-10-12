@@ -39,8 +39,11 @@ const isEmail = iconKey === 'email';
     <!-- Text info -->
     <div class="min-w-0 text-left">
       <div class="flex items-center gap-2 flex-wrap">
-        <h3 class="text-sm sm:text-base font-semibold text-slate-900 truncate group-hover:text-blue-600 transition-colors">
-          {link.title}
+        <h3 
+          data-bilingual={link.title}
+          class="text-sm sm:text-base font-semibold text-slate-900 truncate group-hover:text-blue-600 transition-colors"
+        >
+          {link.title.split('|')[0].trim()}
         </h3>
 
         <!-- Pinned Badge if enabled -->
@@ -52,21 +55,24 @@ const isEmail = iconKey === 'email';
             <svg class="w-2.5 h-2.5 fill-current" viewBox="0 0 24 24">
               <path d="M16 12V4h1V2H7v2h1v8l-2 2v2h5.2v6h1.6v-6H18v-2l-2-2z"/>
             </svg>
-            <span>Ghim</span>
+            <span data-i18n="pinned">Ghim</span>
           </span>
         )}
 
         <!-- Highlight Badge if enabled -->
         {link.highlight && (
           <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white shadow-sm">
-            Hot
+            <span data-i18n="hot">Hot</span>
           </span>
         )}
       </div>
 
       {link.subtitle && (
-        <p class="text-xs text-slate-500 truncate mt-0.5">
-          {link.subtitle}
+        <p 
+          data-bilingual={link.subtitle}
+          class="text-xs text-slate-500 truncate mt-0.5"
+        >
+          {link.subtitle.split('|')[0].trim()}
         </p>
       )}
     </div>
@@ -75,11 +81,17 @@ const isEmail = iconKey === 'email';
   <!-- Arrow Right / Action Indicator -->
   <div class="flex-shrink-0 text-slate-400 group-hover:text-blue-600 transition-all duration-200 transform group-hover:translate-x-1 pl-2">
     {isPhone ? (
-      <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200/80 shadow-sm">
+      <span 
+        data-i18n="callNow"
+        class="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200/80 shadow-sm"
+      >
         Gọi ngay
       </span>
     ) : isEmail ? (
-      <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-amber-50 text-amber-700 border border-amber-200/80 shadow-sm">
+      <span 
+        data-i18n="sendMail"
+        class="text-xs font-semibold px-2.5 py-1 rounded-full bg-amber-50 text-amber-700 border border-amber-200/80 shadow-sm"
+      >
         Gửi thư
       </span>
     ) : (

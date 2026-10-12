@@ -5,6 +5,7 @@ import SocialBar from '../components/SocialBar.astro';
 import LinkCard from '../components/LinkCard.astro';
 import QRCodeModal from '../components/QRCodeModal.astro';
 import Toast from '../components/Toast.astro';
+import LanguageToggle from '../components/LanguageToggle.astro';
 import { getProfileData } from '../lib/cms';
 import '../styles/global.css';
 
@@ -31,21 +32,32 @@ const sheetId = import.meta.env.PUBLIC_GOOGLE_SHEET_ID || '';
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
 
+    <!-- Google Fonts: Plus Jakarta Sans with full Vietnamese & Latin character set -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link 
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" 
+      rel="stylesheet" 
+    />
+
     <!-- SEO & Social OpenGraph Meta Tags -->
     <title>{profile.name} {profile.handle ? `| ${profile.handle}` : ''}</title>
-    {profile.bio && <meta name="description" content={profile.bio} />}
+    {profile.bio && <meta name="description" content={profile.bio.split('|')[0].trim()} />}
     <meta property="og:title" content={profile.name} />
-    {profile.bio && <meta property="og:description" content={profile.bio} />}
+    {profile.bio && <meta property="og:description" content={profile.bio.split('|')[0].trim()} />}
     <meta property="og:type" content="profile" />
     {profile.avatar && <meta property="og:image" content={profile.avatar} />}
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={profile.name} />
-    {profile.bio && <meta name="twitter:description" content={profile.bio} />}
+    {profile.bio && <meta name="twitter:description" content={profile.bio.split('|')[0].trim()} />}
     <meta name="theme-color" content="#fafafa" />
   </head>
   <body class="bg-[#fafafa] text-slate-900 flex flex-col items-center min-h-screen selection:bg-blue-100 selection:text-blue-900">
-    <!-- Ambient clean background -->
+    <!-- Ambient modern pastel mesh background -->
     <Background />
+
+    <!-- Top Navigation with Language Toggle -->
+    <LanguageToggle />
 
     <!-- Responsive Container (Mobile-first, max-w-lg) -->
     <main class="w-full max-w-lg mx-auto px-4 sm:px-6 flex flex-col items-center flex-grow">
@@ -61,9 +73,9 @@ const sheetId = import.meta.env.PUBLIC_GOOGLE_SHEET_ID || '';
           categories.map((category) => (
             <section class="w-full space-y-2.5">
               {categories.length > 1 && category !== 'Liên Kết' && (
-                <h2 class="text-xs font-semibold uppercase tracking-wider text-slate-500 pl-1 flex items-center gap-1.5">
+                <h2 class="text-xs font-semibold uppercase tracking-wider text-slate-400 pl-1 flex items-center gap-1.5">
                   <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
-                  <span>{category}</span>
+                  <span data-bilingual={category}>{category.split('|')[0].trim()}</span>
                 </h2>
               )}
               <div class="space-y-2.5">
@@ -75,8 +87,8 @@ const sheetId = import.meta.env.PUBLIC_GOOGLE_SHEET_ID || '';
           ))
         ) : (
           <div class="w-full p-8 rounded-2xl bg-white/90 backdrop-blur-md border border-slate-200/80 text-center shadow-sm">
-            <p class="text-sm font-medium text-slate-700">Chưa có liên kết nào được kích hoạt.</p>
-            <p class="text-xs text-slate-400 mt-1">Thêm hàng mới vào Google Sheet để hiển thị liên kết tại đây ✨</p>
+            <p data-i18n="empty" class="text-sm font-medium text-slate-700">Chưa có liên kết nào được kích hoạt.</p>
+            <p data-i18n="emptyDesc" class="text-xs text-slate-400 mt-1">Thêm hàng mới vào Google Sheet để hiển thị liên kết tại đây ✨</p>
           </div>
         )}
       </div>

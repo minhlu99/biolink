@@ -1,0 +1,84 @@
+---
+// Clean, interactive language toggle pill
+---
+
+<div class="w-full max-w-lg flex justify-end px-4 pt-4 sm:pt-6">
+  <div 
+    class="inline-flex items-center p-0.5 rounded-full bg-white/80 border border-slate-200/80 shadow-sm backdrop-blur-md text-xs font-semibold"
+    role="group"
+    aria-label="Language selection"
+  >
+    <button
+      id="lang-btn-vi"
+      type="button"
+      data-lang="vi"
+      class="lang-btn px-2.5 py-1 rounded-full transition-all duration-200 bg-slate-900 text-white shadow-sm cursor-pointer"
+    >
+      VI
+    </button>
+    <button
+      id="lang-btn-en"
+      type="button"
+      data-lang="en"
+      class="lang-btn px-2.5 py-1 rounded-full transition-all duration-200 text-slate-500 hover:text-slate-800 cursor-pointer"
+    >
+      EN
+    </button>
+  </div>
+</div>
+
+<script>
+  import { translations, type Language } from '../lib/i18n';
+
+  function setLanguage(lang: Language) {
+    document.documentElement.lang = lang;
+    localStorage.setItem('biolink_lang', lang);
+
+    // Update buttons styling
+    const viBtn = document.getElementById('lang-btn-vi');
+    const enBtn = document.getElementById('lang-btn-en');
+
+    if (lang === 'vi') {
+      viBtn?.classList.add('bg-slate-900', 'text-white', 'shadow-sm');
+      viBtn?.classList.remove('text-slate-500');
+      enBtn?.classList.remove('bg-slate-900', 'text-white', 'shadow-sm');
+      enBtn?.classList.add('text-slate-500');
+    } else {
+      enBtn?.classList.add('bg-slate-900', 'text-white', 'shadow-sm');
+      enBtn?.classList.remove('text-slate-500');
+      viBtn?.classList.remove('bg-slate-900', 'text-white', 'shadow-sm');
+      viBtn?.classList.add('text-slate-500');
+    }
+
+    // Update all elements with data-i18n key
+    const dict = translations[lang];
+    document.querySelectorAll('[data-i18n]').forEach((el) => {
+      const key = el.getAttribute('data-i18n') as keyof typeof dict;
+      if (key && dict[key]) {
+        el.textContent = dict[key];
+      }
+    });
+
+    // Update bilingual split elements (format: "Tiếng Việt | English")
+    document.querySelectorAll('[data-bilingual]').forEach((el) => {
+      const raw = el.getAttribute('data-bilingual') || '';
+      if (raw.includes('|')) {
+        const [vi, en] = raw.split('|').map((s) => s.trim());
+        el.textContent = lang === 'en' && en ? en : vi;
+      }
+    });
+  }
+
+  // Initialize from localStorage or browser language
+  const savedLang = (localStorage.getItem('biolink_lang') as Language) || 
+    (navigator.language.startsWith('vi') ? 'vi' : 'vi');
+
+  setLanguage(savedLang);
+
+  document.querySelectorAll('.lang-btn').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      const targetLang = (e.currentTarget as HTMLElement).getAttribute('data-lang') as Language;
+      if (targetLang) setLanguage(targetLang);
+    });
+  });
+</script>

@@ -41,7 +41,7 @@ const { profile } = Astro.props;
         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
         <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
       </span>
-      <span>{profile.status.text}</span>
+      <span data-bilingual={profile.status.text}>{profile.status.text.split('|')[0].trim()}</span>
     </div>
   )}
 
@@ -53,8 +53,11 @@ const { profile } = Astro.props;
 
   <!-- Bio -->
   {profile.bio && (
-    <p class="text-sm sm:text-base text-slate-600 max-w-md leading-relaxed mb-4">
-      {profile.bio}
+    <p 
+      data-bilingual={profile.bio}
+      class="text-sm sm:text-base text-slate-600 max-w-md leading-relaxed mb-4"
+    >
+      {profile.bio.split('|')[0].trim()}
     </p>
   )}
 
@@ -65,7 +68,7 @@ const { profile } = Astro.props;
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
       </svg>
-      <span>{profile.location}</span>
+      <span data-bilingual={profile.location}>{profile.location.split('|')[0].trim()}</span>
     </div>
   )}
 
@@ -79,7 +82,7 @@ const { profile } = Astro.props;
       <svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
       </svg>
-      <span>Chia sẻ</span>
+      <span data-i18n="share">Chia sẻ</span>
     </button>
 
     <button
@@ -90,7 +93,7 @@ const { profile } = Astro.props;
       <svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
       </svg>
-      <span>Mã QR</span>
+      <span data-i18n="qr">Mã QR</span>
     </button>
   </div>
 </header>
