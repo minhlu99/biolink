@@ -1,26 +1,18 @@
 ---
-// Ambient dynamic background with subtle glow orbs
+// Clean, light aesthetic ambient background
 ---
 
-<div class="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
-  <!-- Subtle dark grid texture -->
+<div class="fixed inset-0 pointer-events-none -z-10 overflow-hidden bg-slate-50">
+  <!-- Subtle warm ambient blur at top -->
   <div 
-    class="absolute inset-0 opacity-[0.03]"
-    style="background-image: radial-gradient(rgba(255, 255, 255, 0.4) 1px, transparent 1px); background-size: 24px 24px;"
+    class="absolute -top-[10%] left-1/2 -translate-x-1/2 w-[600px] h-[500px] bg-gradient-to-b from-blue-100/60 via-purple-50/40 to-transparent rounded-full blur-[100px]"
   ></div>
 
-  <!-- Primary Cyan Glow Orb -->
+  <!-- Ultra soft pastel accent at side -->
   <div 
-    class="absolute -top-[15%] left-1/2 -translate-x-1/2 w-[550px] h-[550px] bg-cyan-500/10 rounded-full blur-[120px] animate-aurora-1"
+    class="absolute top-[40%] -left-[10%] w-[450px] h-[450px] bg-sky-100/40 rounded-full blur-[120px]"
   ></div>
-
-  <!-- Violet / Indigo Accent Glow Orb -->
   <div 
-    class="absolute top-[35%] -left-[10%] w-[450px] h-[450px] bg-indigo-600/10 rounded-full blur-[130px] animate-aurora-2"
-  ></div>
-
-  <!-- Deep Pink / Purple Bottom Glow Orb -->
-  <div 
-    class="absolute bottom-[5%] -right-[10%] w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[140px] animate-aurora-1"
+    class="absolute bottom-[10%] -right-[10%] w-[450px] h-[450px] bg-indigo-50/50 rounded-full blur-[120px]"
   ></div>
 </div>

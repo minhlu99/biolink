@@ -12,7 +12,7 @@ import '../styles/global.css';
 const profile = await getProfileData();
 
 // Group links by category for structured presentation
-const groupedLinks = profile.links.reduce((acc, link) => {
+const groupedLinks = (profile.links || []).reduce((acc, link) => {
   const cat = link.category || 'Liên Kết';
   if (!acc[cat]) acc[cat] = [];
   acc[cat].push(link);
@@ -24,7 +24,7 @@ const sheetId = import.meta.env.PUBLIC_GOOGLE_SHEET_ID || '';
 ---
 
 <!doctype html>
-<html lang="vi" class="dark">
+<html lang="vi">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
@@ -32,42 +32,41 @@ const sheetId = import.meta.env.PUBLIC_GOOGLE_SHEET_ID || '';
     <meta name="generator" content={Astro.generator} />
 
     <!-- SEO & Social OpenGraph Meta Tags -->
-    <title>{profile.name} | {profile.handle}</title>
-    <meta name="description" content={profile.bio} />
-    <meta property="og:title" content={`${profile.name} (${profile.handle})`} />
-    <meta property="og:description" content={profile.bio} />
+    <title>{profile.name} {profile.handle ? `| ${profile.handle}` : ''}</title>
+    {profile.bio && <meta name="description" content={profile.bio} />}
+    <meta property="og:title" content={profile.name} />
+    {profile.bio && <meta property="og:description" content={profile.bio} />}
     <meta property="og:type" content="profile" />
-    <meta property="og:image" content={profile.avatar} />
+    {profile.avatar && <meta property="og:image" content={profile.avatar} />}
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content={`${profile.name} (${profile.handle})`} />
-    <meta name="twitter:description" content={profile.bio} />
-    <meta name="twitter:image" content={profile.avatar} />
-    <meta name="theme-color" content="#06080d" />
+    <meta name="twitter:title" content={profile.name} />
+    {profile.bio && <meta name="twitter:description" content={profile.bio} />}
+    <meta name="theme-color" content="#f8fafc" />
   </head>
-  <body class="bg-dark-950 text-slate-100 flex flex-col items-center min-h-screen selection:bg-cyan-500/30 selection:text-cyan-200">
-    <!-- Ambient mesh background -->
+  <body class="bg-slate-50 text-slate-900 flex flex-col items-center min-h-screen selection:bg-blue-100 selection:text-blue-900">
+    <!-- Ambient clean background -->
     <Background />
 
-    <!-- Responsive Container -->
-    <main class="w-full max-w-xl mx-auto px-4 sm:px-6 flex flex-col items-center flex-grow">
+    <!-- Responsive Container (Mobile-first, max-w-lg) -->
+    <main class="w-full max-w-lg mx-auto px-4 sm:px-6 flex flex-col items-center flex-grow">
       <!-- Profile Header -->
       <Header profile={profile} />
 
-      <!-- Social Networks Bar -->
+      <!-- Social Networks Bar (only renders if valid links exist) -->
       <SocialBar socials={profile.socials} />
 
       <!-- Links Container -->
-      <div id="links-container" class="w-full space-y-6 mb-12">
+      <div id="links-container" class="w-full space-y-5 mb-12">
         {profile.links && profile.links.length > 0 ? (
           categories.map((category) => (
-            <section class="w-full space-y-3">
-              {categories.length > 1 && (
-                <h2 class="text-xs font-semibold uppercase tracking-wider text-slate-400 pl-1 flex items-center gap-2">
-                  <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+            <section class="w-full space-y-2.5">
+              {categories.length > 1 && category !== 'Liên Kết' && (
+                <h2 class="text-xs font-semibold uppercase tracking-wider text-slate-500 pl-1 flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
                   <span>{category}</span>
                 </h2>
               )}
-              <div class="space-y-3">
+              <div class="space-y-2.5">
                 {groupedLinks[category].map((link) => (
                   <LinkCard link={link} />
                 ))}
@@ -75,49 +74,35 @@ const sheetId = import.meta.env.PUBLIC_GOOGLE_SHEET_ID || '';
             </section>
           ))
         ) : (
-          <div class="w-full p-8 rounded-2xl glass-panel text-center text-slate-400">
-            <p class="text-sm font-medium text-slate-300">Chưa có liên kết nào được kích hoạt.</p>
+          <div class="w-full p-8 rounded-2xl bg-white border border-slate-200 text-center shadow-sm">
+            <p class="text-sm font-medium text-slate-700">Chưa có liên kết nào được kích hoạt.</p>
             <p class="text-xs text-slate-400 mt-1">Thêm hàng mới vào Google Sheet để hiển thị liên kết tại đây ✨</p>
           </div>
         )}
       </div>
 
-      <!-- Footer -->
-      <footer class="mt-auto py-8 text-center text-xs text-slate-400 space-y-2">
-        <p class="flex items-center justify-center gap-1.5 text-slate-400">
-          <span>Xây dựng với</span>
-          <span class="text-cyan-400 font-semibold">Astro</span>
-          <span>&</span>
-          <span class="text-indigo-400 font-semibold">Cloudflare</span>
-        </p>
-        <p class="text-[11px] text-slate-400">
-          © {new Date().getFullYear()} {profile.name}. All rights reserved.
-        </p>
+      <!-- Clean Minimal Footer -->
+      <footer class="mt-auto py-6 text-center text-xs text-slate-400">
+        <p>© {new Date().getFullYear()} {profile.name}</p>
       </footer>
     </main>
 
     <!-- Modals & Feedback Elements -->
-    <QRCodeModal name={profile.name} avatar={profile.avatar} />
+    <QRCodeModal name={profile.name} avatar={profile.avatar || '/avatar.svg'} />
     <Toast />
 
-    <!-- Live Headless CMS Client-Side Revalidation Script (Optional runtime sync) -->
+    <!-- Live Client-side sync with Google Sheets (if configured) -->
     {sheetId && (
       <script define:vars={{ sheetId }}>
-        // Background check to keep links ultra-fresh if user edits Google Sheets
-        async function revalidateGoogleSheet() {
+        async function checkLiveSheet() {
           try {
             const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json`;
-            const res = await fetch(url);
-            if (!res.ok) return;
-            const text = await res.text();
-            const match = text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\);/);
-            if (!match || !match[1]) return;
-            // Cached in sessionStorage or local comparison could trigger subtle live DOM update
+            await fetch(url);
           } catch (e) {
-            // Silently fallback to SSG pre-rendered links
+            // Silently fallback to static pre-rendered output
           }
         }
-        revalidateGoogleSheet();
+        checkLiveSheet();
       </script>
     )}
   </body>
