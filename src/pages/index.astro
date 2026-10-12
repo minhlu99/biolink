@@ -52,7 +52,7 @@ const sheetId = import.meta.env.PUBLIC_GOOGLE_SHEET_ID || '';
     {profile.bio && <meta name="twitter:description" content={profile.bio.split('|')[0].trim()} />}
     <meta name="theme-color" content="#fafafa" />
   </head>
-  <body class="bg-[#fafafa] text-slate-900 flex flex-col items-center min-h-screen selection:bg-blue-100 selection:text-blue-900">
+  <body data-sheet-id={sheetId} class="bg-[#fafafa] text-slate-900 flex flex-col items-center min-h-screen selection:bg-blue-100 selection:text-blue-900">
     <!-- Ambient modern pastel mesh background -->
     <Background />
 
@@ -103,18 +103,12 @@ const sheetId = import.meta.env.PUBLIC_GOOGLE_SHEET_ID || '';
     <QRCodeModal name={profile.name} avatar={profile.avatar || '/avatar.svg'} />
     <Toast />
 
-    <!-- Live Client-side sync with Google Sheets (if configured) -->
+    <!-- Live Client-side sync with Google Sheets (1-minute throttle cooldown) -->
     {sheetId && (
-      <script define:vars={{ sheetId }}>
-        async function checkLiveSheet() {
-          try {
-            const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json`;
-            await fetch(url);
-          } catch (e) {
-            // Silently fallback to static pre-rendered output
-          }
-        }
-        checkLiveSheet();
+      <script>
+        import { initLiveSync } from '../lib/liveSync';
+        const sheetId = document.body.dataset.sheetId;
+        if (sheetId) initLiveSync(sheetId);
       </script>
     )}
   </body>
