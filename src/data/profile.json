@@ -1,77 +1,16 @@
 {
-  "name": "MyOS Dev",
-  "handle": "@myosdev",
-  "bio": "Software Engineer & Builder 🚀 Đang phát triển các sản phẩm SaaS & chia sẻ kiến thức công nghệ hiện đại.",
+  "name": "Họ và Tên",
+  "handle": "@username",
+  "bio": "Mô tả ngắn gọn về bản thân hoặc lĩnh vực hoạt động ✨",
   "avatar": "/avatar.svg",
   "verified": true,
-  "status": {
-    "text": "Sẵn sàng nhận dự án mới",
-    "dotColor": "bg-emerald-400"
-  },
-  "location": "TP. Hồ Chí Minh, Việt Nam",
   "socials": [
-    { "platform": "github", "url": "https://github.com", "label": "GitHub" },
-    { "platform": "x", "url": "https://x.com", "label": "X (Twitter)" },
-    { "platform": "linkedin", "url": "https://linkedin.com", "label": "LinkedIn" },
-    { "platform": "telegram", "url": "https://t.me", "label": "Telegram" },
-    { "platform": "youtube", "url": "https://youtube.com", "label": "YouTube" },
-    { "platform": "email", "url": "mailto:contact@example.com", "label": "Email" }
+    { "platform": "facebook", "url": "https://facebook.com" },
+    { "platform": "instagram", "url": "https://instagram.com" },
+    { "platform": "tiktok", "url": "https://tiktok.com" },
+    { "platform": "youtube", "url": "https://youtube.com" },
+    { "platform": "telegram", "url": "https://t.me" },
+    { "platform": "email", "url": "mailto:example@gmail.com" }
   ],
-  "links": [
-    {
-      "id": "1",
-      "title": "Dự Án SaaS Mới Nhất 🚀",
-      "subtitle": "Nền tảng tự động hóa quy trình cho doanh nghiệp & dev",
-      "url": "https://example.com/project",
-      "icon": "rocket",
-      "category": "Dự Án Nổi Bật",
-      "highlight": true,
-      "pinned": true,
-      "active": true
-    },
-    {
-      "id": "2",
-      "title": "Kho Mã Nguồn Mở Trên GitHub ⭐",
-      "subtitle": "Tổng hợp các template, CLI tool và thư viện tiện ích",
-      "url": "https://github.com",
-      "icon": "github",
-      "category": "Dự Án Nổi Bật",
-      "highlight": false,
-      "pinned": false,
-      "active": true
-    },
-    {
-      "id": "3",
-      "title": "Blog Kỹ Thuật & Bài Viết Chuyên Sâu ✍️",
-      "subtitle": "Kiến trúc hệ thống, Cloudflare Edge, NestJS, Next.js & Bun",
-      "url": "https://example.com/blog",
-      "icon": "book",
-      "category": "Tài Nguyên & Chia Sẻ",
-      "highlight": false,
-      "pinned": false,
-      "active": true
-    },
-    {
-      "id": "4",
-      "title": "Đặt Lịch Tư Vấn 1-on-1 (30 Phút) ☕",
-      "subtitle": "Trao đổi định hướng công nghệ, review CV hoặc code review",
-      "url": "https://cal.com",
-      "icon": "calendar",
-      "category": "Kết Nối & Hợp Tác",
-      "highlight": true,
-      "pinned": false,
-      "active": true
-    },
-    {
-      "id": "5",
-      "title": "Mời Tôi Một Ly Cà Phê ☕",
-      "subtitle": "Ủng hộ các dự án mã nguồn mở & bài viết miễn phí",
-      "url": "https://buymeacoffee.com",
-      "icon": "coffee",
-      "category": "Kết Nối & Hợp Tác",
-      "highlight": false,
-      "pinned": false,
-      "active": true
-    }
-  ]
+  "links": []
 }

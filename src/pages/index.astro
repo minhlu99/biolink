@@ -58,21 +58,28 @@ const sheetId = import.meta.env.PUBLIC_GOOGLE_SHEET_ID || '';
 
       <!-- Links Container -->
       <div id="links-container" class="w-full space-y-6 mb-12">
-        {categories.map((category) => (
-          <section class="w-full space-y-3">
-            {categories.length > 1 && (
-              <h2 class="text-xs font-semibold uppercase tracking-wider text-slate-400 pl-1 flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
-                <span>{category}</span>
-              </h2>
-            )}
-            <div class="space-y-3">
-              {groupedLinks[category].map((link) => (
-                <LinkCard link={link} />
-              ))}
-            </div>
-          </section>
-        ))}
+        {profile.links && profile.links.length > 0 ? (
+          categories.map((category) => (
+            <section class="w-full space-y-3">
+              {categories.length > 1 && (
+                <h2 class="text-xs font-semibold uppercase tracking-wider text-slate-400 pl-1 flex items-center gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+                  <span>{category}</span>
+                </h2>
+              )}
+              <div class="space-y-3">
+                {groupedLinks[category].map((link) => (
+                  <LinkCard link={link} />
+                ))}
+              </div>
+            </section>
+          ))
+        ) : (
+          <div class="w-full p-8 rounded-2xl glass-panel text-center text-slate-400">
+            <p class="text-sm font-medium text-slate-300">Chưa có liên kết nào được kích hoạt.</p>
+            <p class="text-xs text-slate-400 mt-1">Thêm hàng mới vào Google Sheet để hiển thị liên kết tại đây ✨</p>
+          </div>
+        )}
       </div>
 
       <!-- Footer -->

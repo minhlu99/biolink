@@ -43,12 +43,25 @@ export async function fetchLinksFromGoogleSheets(sheetId: string): Promise<LinkI
       const c = rows[i].c;
       if (!c || !c[1] || !c[3]) continue; // Title and URL are required
 
-      const id = c[0]?.v?.toString() || `${i + 1}`;
-      const title = c[1]?.v?.toString() || '';
-      const subtitle = c[2]?.v?.toString() || '';
-      const url = c[3]?.v?.toString() || '#';
-      const icon = c[4]?.v?.toString()?.toLowerCase() || 'link';
-      const category = c[5]?.v?.toString() || 'General';
+      const title = c[1]?.v?.toString()?.trim() || '';
+      let url = c[3]?.v?.toString()?.trim() || '';
+
+      // Skip the header row if present
+      if (title.toLowerCase() === 'title' || url.toLowerCase() === 'url' || title.toLowerCase() === 'tên') {
+        continue;
+      }
+
+      if (!url) continue;
+
+      // Auto-prefix https:// if user only entered domain
+      if (!url.startsWith('http://') && !url.startsWith('https://') && !url.startsWith('mailto:') && !url.startsWith('tel:')) {
+        url = `https://${url}`;
+      }
+
+      const id = c[0]?.v?.toString()?.trim() || `${i + 1}`;
+      const subtitle = c[2]?.v?.toString()?.trim() || '';
+      const icon = c[4]?.v?.toString()?.trim()?.toLowerCase() || 'link';
+      const category = c[5]?.v?.toString()?.trim() || 'Liên Kết';
       
       const highlightRaw = c[6]?.v?.toString()?.toLowerCase();
       const highlight = highlightRaw === 'true' || highlightRaw === '1' || highlightRaw === 'yes';

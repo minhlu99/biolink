@@ -17,7 +17,7 @@ const { profile } = Astro.props;
     <!-- Image Wrapper -->
     <div class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden border-2 border-white/20 bg-dark-900 p-0.5 shadow-xl">
       <img
-        src={profile.avatar}
+        src={profile.avatar || '/avatar.svg'}
         alt={profile.name}
         class="w-full h-full object-cover rounded-full transform group-hover:scale-105 transition duration-500"
         loading="eager"
@@ -52,12 +52,14 @@ const { profile } = Astro.props;
   <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white mb-1 flex items-center gap-2 justify-center">
     <span>{profile.name}</span>
   </h1>
-  <p class="text-sm font-medium text-cyan-400 mb-3">{profile.handle}</p>
+  {profile.handle && <p class="text-sm font-medium text-cyan-400 mb-3">{profile.handle}</p>}
 
   <!-- Bio -->
-  <p class="text-sm sm:text-base text-slate-300 max-w-md leading-relaxed mb-4">
-    {profile.bio}
-  </p>
+  {profile.bio && (
+    <p class="text-sm sm:text-base text-slate-300 max-w-md leading-relaxed mb-4">
+      {profile.bio}
+    </p>
+  )}
 
   <!-- Location (if present) -->
   {profile.location && (

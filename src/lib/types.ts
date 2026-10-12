@@ -1,5 +1,5 @@
 export interface SocialItem {
-  platform: 'github' | 'x' | 'twitter' | 'linkedin' | 'telegram' | 'youtube' | 'facebook' | 'instagram' | 'tiktok' | 'threads' | 'discord' | 'email' | 'website';
+  platform: string;
   url: string;
   label?: string;
 }
@@ -18,15 +18,15 @@ export interface LinkItem {
 
 export interface Profile {
   name: string;
-  handle: string;
-  bio: string;
-  avatar: string;
+  handle?: string;
+  bio?: string;
+  avatar?: string;
   status?: {
     text: string;
-    dotColor?: string; // e.g. "bg-emerald-400"
+    dotColor?: string;
   };
   location?: string;
   verified?: boolean;
-  socials: SocialItem[];
-  links: LinkItem[];
+  socials?: SocialItem[];
+  links?: LinkItem[];
 }
