@@ -84,23 +84,35 @@ export async function fetchFromGoogleSheets(sheetId: string): Promise<SheetFetch
         continue;
       }
 
-      // Check if this row is a profile configuration row
-      if (lowerId === 'avatar' || lowerTitle === 'avatar' || lowerTitle === 'ảnh đại diện' || lowerTitle === 'avatar url') {
-        const avatarLink = targetUrl || c[2]?.v?.toString()?.trim();
-        if (avatarLink) {
-          customAvatar = normalizeImageUrl(avatarLink);
-        }
-        continue; // Do not render as a link card
+      // 1. Name configuration row
+      if (lowerId === 'name' || lowerId === 'tên') {
+        customName = (lowerTitle !== 'name' && lowerTitle !== 'tên' ? title : '') || c[2]?.v?.toString()?.trim() || targetUrl;
+        continue;
       }
-
-      if (lowerId === 'name' || lowerTitle === 'name' || lowerTitle === 'tên' || lowerTitle === 'họ và tên') {
+      if (lowerTitle === 'name' || lowerTitle === 'họ và tên' || lowerTitle === 'tên') {
         customName = c[2]?.v?.toString()?.trim() || targetUrl;
         continue;
       }
 
-      if (lowerId === 'bio' || lowerTitle === 'bio' || lowerTitle === 'giới thiệu' || lowerTitle === 'tiểu sử' || lowerTitle === 'mô tả') {
-        // Can be written in subtitle column (col 2) or url column (col 3)
+      // 2. Bio configuration row
+      if (lowerId === 'bio' || lowerId === 'tiểu sử') {
+        customBio = (lowerTitle !== 'bio' && lowerTitle !== 'tiểu sử' ? title : '') || c[2]?.v?.toString()?.trim() || targetUrl;
+        continue;
+      }
+      if (lowerTitle === 'bio' || lowerTitle === 'giới thiệu' || lowerTitle === 'tiểu sử' || lowerTitle === 'mô tả') {
         customBio = c[2]?.v?.toString()?.trim() || targetUrl;
+        continue;
+      }
+
+      // 3. Avatar configuration row
+      if (lowerId === 'avatar') {
+        const avatarLink = targetUrl || c[2]?.v?.toString()?.trim() || (lowerTitle !== 'avatar' ? title : '');
+        if (avatarLink) customAvatar = normalizeImageUrl(avatarLink);
+        continue;
+      }
+      if (lowerTitle === 'avatar' || lowerTitle === 'ảnh đại diện' || lowerTitle === 'avatar url') {
+        const avatarLink = targetUrl || c[2]?.v?.toString()?.trim();
+        if (avatarLink) customAvatar = normalizeImageUrl(avatarLink);
         continue;
       }
 

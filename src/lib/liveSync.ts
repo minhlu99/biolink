@@ -55,19 +55,35 @@ function parseSheetJson(jsonText: string): ParsedSheetData | null {
         continue;
       }
 
-      if (lowerId === 'avatar' || lowerTitle === 'avatar' || lowerTitle === 'ảnh đại diện' || lowerTitle === 'avatar url') {
-        const avatarLink = targetUrl || c[2]?.v?.toString()?.trim();
-        if (avatarLink) customAvatar = normalizeImageUrl(avatarLink);
+      // 1. Name configuration row
+      if (lowerId === 'name' || lowerId === 'tên') {
+        customName = (lowerTitle !== 'name' && lowerTitle !== 'tên' ? title : '') || c[2]?.v?.toString()?.trim() || targetUrl;
         continue;
       }
-
-      if (lowerId === 'name' || lowerTitle === 'name' || lowerTitle === 'tên' || lowerTitle === 'họ và tên') {
+      if (lowerTitle === 'name' || lowerTitle === 'họ và tên' || lowerTitle === 'tên') {
         customName = c[2]?.v?.toString()?.trim() || targetUrl;
         continue;
       }
 
-      if (lowerId === 'bio' || lowerTitle === 'bio' || lowerTitle === 'giới thiệu' || lowerTitle === 'tiểu sử' || lowerTitle === 'mô tả') {
+      // 2. Bio configuration row
+      if (lowerId === 'bio' || lowerId === 'tiểu sử') {
+        customBio = (lowerTitle !== 'bio' && lowerTitle !== 'tiểu sử' ? title : '') || c[2]?.v?.toString()?.trim() || targetUrl;
+        continue;
+      }
+      if (lowerTitle === 'bio' || lowerTitle === 'giới thiệu' || lowerTitle === 'tiểu sử' || lowerTitle === 'mô tả') {
         customBio = c[2]?.v?.toString()?.trim() || targetUrl;
+        continue;
+      }
+
+      // 3. Avatar configuration row
+      if (lowerId === 'avatar') {
+        const avatarLink = targetUrl || c[2]?.v?.toString()?.trim() || (lowerTitle !== 'avatar' ? title : '');
+        if (avatarLink) customAvatar = normalizeImageUrl(avatarLink);
+        continue;
+      }
+      if (lowerTitle === 'avatar' || lowerTitle === 'ảnh đại diện' || lowerTitle === 'avatar url') {
+        const avatarLink = targetUrl || c[2]?.v?.toString()?.trim();
+        if (avatarLink) customAvatar = normalizeImageUrl(avatarLink);
         continue;
       }
 
