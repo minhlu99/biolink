@@ -1,4 +1,5 @@
 import type { LinkItem, Profile } from './types';
+import { processUrlAndIcon } from './icons';
 import localProfile from '../data/profile.json';
 
 /**
@@ -104,13 +105,11 @@ export async function fetchFromGoogleSheets(sheetId: string): Promise<SheetFetch
       // If it's a regular link, targetUrl is required
       if (!targetUrl) continue;
 
-      // Auto-prefix https:// if user only entered domain
-      if (!targetUrl.startsWith('http://') && !targetUrl.startsWith('https://') && !targetUrl.startsWith('mailto:') && !targetUrl.startsWith('tel:')) {
-        targetUrl = `https://${targetUrl}`;
-      }
+      // Automatically normalize URL and detect icon (threads, facebook, tiktok, instagram, zalo, phone, email, etc.)
+      const manualIcon = c[4]?.v?.toString()?.trim() || '';
+      const { url: processedUrl, icon: detectedIcon } = processUrlAndIcon(targetUrl, manualIcon);
 
       const subtitle = c[2]?.v?.toString()?.trim() || '';
-      const icon = c[4]?.v?.toString()?.trim()?.toLowerCase() || 'link';
       const category = c[5]?.v?.toString()?.trim() || 'Liên Kết';
       
       const highlightRaw = c[6]?.v?.toString()?.toLowerCase();
@@ -127,8 +126,8 @@ export async function fetchFromGoogleSheets(sheetId: string): Promise<SheetFetch
           id,
           title,
           subtitle,
-          url: targetUrl,
-          icon,
+          url: processedUrl,
+          icon: detectedIcon,
           category,
           highlight,
           pinned,
