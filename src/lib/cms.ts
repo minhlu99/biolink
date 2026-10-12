@@ -85,20 +85,22 @@ export async function fetchFromGoogleSheets(sheetId: string): Promise<SheetFetch
       }
 
       // Check if this row is a profile configuration row
-      if (lowerId === 'avatar' || lowerTitle === 'avatar' || lowerTitle === 'ảnh đại diện') {
-        if (targetUrl) {
-          customAvatar = normalizeImageUrl(targetUrl);
+      if (lowerId === 'avatar' || lowerTitle === 'avatar' || lowerTitle === 'ảnh đại diện' || lowerTitle === 'avatar url') {
+        const avatarLink = targetUrl || c[2]?.v?.toString()?.trim();
+        if (avatarLink) {
+          customAvatar = normalizeImageUrl(avatarLink);
         }
         continue; // Do not render as a link card
       }
 
-      if (lowerId === 'name' || lowerTitle === 'họ và tên') {
-        customName = targetUrl || c[2]?.v?.toString()?.trim();
+      if (lowerId === 'name' || lowerTitle === 'name' || lowerTitle === 'tên' || lowerTitle === 'họ và tên') {
+        customName = c[2]?.v?.toString()?.trim() || targetUrl;
         continue;
       }
 
-      if (lowerId === 'bio' || lowerTitle === 'giới thiệu') {
-        customBio = targetUrl || c[2]?.v?.toString()?.trim();
+      if (lowerId === 'bio' || lowerTitle === 'bio' || lowerTitle === 'giới thiệu' || lowerTitle === 'tiểu sử' || lowerTitle === 'mô tả') {
+        // Can be written in subtitle column (col 2) or url column (col 3)
+        customBio = c[2]?.v?.toString()?.trim() || targetUrl;
         continue;
       }
 

@@ -56,18 +56,22 @@ Nếu bạn muốn thêm/sửa/xóa link ngay trên điện thoại mà **không
 - **Cột `highlight`**: `TRUE` (sẽ có viền phát sáng gradient và badge HOT).
 - **Cột `active`**: `TRUE` để hiển thị, `FALSE` để ẩn link tạm thời.
 
-### 🖼️ Cập nhật Avatar trực tiếp từ Google Sheet:
-Bạn (hoặc khách) có thể đổi avatar bất cứ lúc nào bằng cách thêm 1 hàng đặc biệt vào Sheet:
+### 🖼️ Cập nhật Avatar, Tên & Bio trực tiếp từ Google Sheet:
+Bạn (hoặc khách) có thể đổi Avatar, Tên và Bio bất cứ lúc nào bằng cách thêm các hàng cấu hình vào Sheet:
 | id | title | subtitle | url | icon | category | highlight | pinned | active |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|
-| **avatar** | Ảnh đại diện | | **https://link-anh.com/avatar.jpg** | | | | | TRUE |
+| **avatar** | Ảnh đại diện | | **https://link-anh.com/avatar.webp** | | | | | TRUE |
+| **bio** | Giới thiệu | **Software Engineer & Content Creator ✨ \| Developer & Creator** | | | | | | TRUE |
+| **name** | Họ và Tên | **Nguyễn Văn A** | | | | | | TRUE |
 
-> 💡 **Hỗ trợ cả link Google Drive!** Bạn chỉ cần dán link chia sẻ Google Drive (dạng `https://drive.google.com/file/d/.../view`), hệ thống sẽ tự động chuyển đổi sang link ảnh hiển thị tốc độ cao.
+> 💡 **Hỗ trợ cả link Google Drive cho Avatar!** Bạn chỉ cần dán link chia sẻ Google Drive (dạng `https://drive.google.com/file/d/.../view`), hệ thống sẽ tự động chuyển đổi sang link ảnh hiển thị tốc độ cao.
 
-#### 📐 Kích thước Avatar tối ưu nhất:
-- **Tỉ lệ**: Vuông `1:1` (chuẩn 500x500 px hoặc 800x800 px).
-- **Định dạng**: `.webp`, `.png` hoặc `.jpg`.
-- **Dung lượng**: Dưới 1MB để tải nhanh nhất.
+#### 📐 Tiêu chuẩn Avatar tối ưu nhất hiện nay:
+- **Định dạng tối ưu**: **`.webp`** (nhẹ hơn JPG 30%, chất lượng hiển thị sắc nét, tải tức thì).
+- **Tỉ lệ khung hình**: Vuông tuyệt đối **`1:1`**.
+- **Kích thước độ phân giải khuyến nghị**: **`500 x 500 px`** (hoặc `800 x 800 px` cho màn hình Retina siêu nét).
+- **Dung lượng tệp lý tưởng**: **`30 KB - 80 KB`** (tối đa 150 KB).
+- **Bố cục chân dung**: Căn giữa mặt, khuôn mặt chiếm khoảng 60% - 70% khung hình để khi bo tròn (`rounded-full`) không bị che mất tóc hay tai.
 
 ### Bước 2: Chia sẻ công khai
 - Bấm nút **Chia sẻ (Share)** ở góc trên bên phải Google Sheet.
