@@ -1,18 +1,22 @@
 ---
-// Clean, light aesthetic ambient background
+// Modern light gradient ambient background (Bento / Apple / Linktree Pro aesthetic)
 ---
 
-<div class="fixed inset-0 pointer-events-none -z-10 overflow-hidden bg-slate-50">
-  <!-- Subtle warm ambient blur at top -->
+<div class="fixed inset-0 pointer-events-none -z-10 overflow-hidden bg-[#fafafa]">
+  <!-- Smooth multi-point ambient gradient mesh -->
   <div 
-    class="absolute -top-[10%] left-1/2 -translate-x-1/2 w-[600px] h-[500px] bg-gradient-to-b from-blue-100/60 via-purple-50/40 to-transparent rounded-full blur-[100px]"
+    class="absolute inset-0"
+    style="background: 
+      radial-gradient(at 15% 10%, rgba(224, 231, 255, 0.7) 0px, transparent 55%),
+      radial-gradient(at 85% 15%, rgba(245, 232, 255, 0.6) 0px, transparent 50%),
+      radial-gradient(at 50% 50%, rgba(254, 243, 199, 0.35) 0px, transparent 55%),
+      radial-gradient(at 80% 85%, rgba(219, 234, 254, 0.5) 0px, transparent 50%),
+      radial-gradient(at 20% 90%, rgba(243, 232, 255, 0.4) 0px, transparent 50%);"
   ></div>
 
-  <!-- Ultra soft pastel accent at side -->
+  <!-- Ultra-subtle micro-dot noise pattern for paper/canvas texture depth -->
   <div 
-    class="absolute top-[40%] -left-[10%] w-[450px] h-[450px] bg-sky-100/40 rounded-full blur-[120px]"
-  ></div>
-  <div 
-    class="absolute bottom-[10%] -right-[10%] w-[450px] h-[450px] bg-indigo-50/50 rounded-full blur-[120px]"
+    class="absolute inset-0 opacity-[0.025]"
+    style="background-image: radial-gradient(#000000 1px, transparent 1px); background-size: 20px 20px;"
   ></div>
 </div>

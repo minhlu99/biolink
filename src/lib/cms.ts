@@ -136,6 +136,13 @@ export async function fetchFromGoogleSheets(sheetId: string): Promise<SheetFetch
       }
     }
 
+    // Sort pinned links to the top while preserving row order
+    links.sort((a, b) => {
+      if (a.pinned && !b.pinned) return -1;
+      if (!a.pinned && b.pinned) return 1;
+      return 0;
+    });
+
     return {
       links: links.length > 0 ? links : fallbackLinks,
       avatar: customAvatar,

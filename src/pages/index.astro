@@ -41,9 +41,9 @@ const sheetId = import.meta.env.PUBLIC_GOOGLE_SHEET_ID || '';
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={profile.name} />
     {profile.bio && <meta name="twitter:description" content={profile.bio} />}
-    <meta name="theme-color" content="#f8fafc" />
+    <meta name="theme-color" content="#fafafa" />
   </head>
-  <body class="bg-slate-50 text-slate-900 flex flex-col items-center min-h-screen selection:bg-blue-100 selection:text-blue-900">
+  <body class="bg-[#fafafa] text-slate-900 flex flex-col items-center min-h-screen selection:bg-blue-100 selection:text-blue-900">
     <!-- Ambient clean background -->
     <Background />
 
@@ -74,7 +74,7 @@ const sheetId = import.meta.env.PUBLIC_GOOGLE_SHEET_ID || '';
             </section>
           ))
         ) : (
-          <div class="w-full p-8 rounded-2xl bg-white border border-slate-200 text-center shadow-sm">
+          <div class="w-full p-8 rounded-2xl bg-white/90 backdrop-blur-md border border-slate-200/80 text-center shadow-sm">
             <p class="text-sm font-medium text-slate-700">Chưa có liên kết nào được kích hoạt.</p>
             <p class="text-xs text-slate-400 mt-1">Thêm hàng mới vào Google Sheet để hiển thị liên kết tại đây ✨</p>
           </div>
