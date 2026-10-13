@@ -1,34 +1,49 @@
 ---
-// Modern light gradient ambient background (Bento / Apple / Linktree Pro aesthetic)
+// Living ambient pastel aura background (Dynamic Apple / Stripe / Bento aesthetic)
 ---
 
-<div class="fixed inset-0 pointer-events-none -z-10 overflow-hidden bg-[#fafafa]">
-  <!-- Fluid ambient aura mesh (GPU-accelerated, floating pastel lights) -->
+<div class="fixed inset-0 pointer-events-none -z-10 overflow-hidden ambient-mesh">
+  <!-- Dynamic floating aura blooms (GPU-accelerated, high-contrast pastel lights) -->
   <div class="absolute inset-0 overflow-hidden">
-    <!-- Orb 1: Soft Indigo / Periwinkle (Top Left) -->
-    <div class="orb orb-1 absolute -top-[15%] -left-[10%] w-[70vw] h-[70vw] max-w-[560px] max-h-[560px] rounded-full blur-[75px] sm:blur-[110px] opacity-75 bg-gradient-to-br from-indigo-200/80 via-blue-100/50 to-transparent"></div>
+    <!-- Bloom 1: Indigo & Electric Blue (Top Left) -->
+    <div class="orb orb-1 absolute -top-[10%] -left-[10%] w-[85vw] h-[85vw] max-w-[540px] max-h-[540px] rounded-full blur-[65px] sm:blur-[85px] opacity-75 bg-gradient-to-tr from-indigo-300 via-blue-200 to-purple-200"></div>
 
-    <!-- Orb 2: Soft Lilac / Lavender (Top Right) -->
-    <div class="orb orb-2 absolute -top-[10%] -right-[10%] w-[65vw] h-[65vw] max-w-[520px] max-h-[520px] rounded-full blur-[80px] sm:blur-[115px] opacity-70 bg-gradient-to-bl from-purple-200/75 via-fuchsia-100/40 to-transparent"></div>
+    <!-- Bloom 2: Rose Pink & Soft Lilac (Top Right) -->
+    <div class="orb orb-2 absolute -top-[5%] -right-[10%] w-[80vw] h-[80vw] max-w-[500px] max-h-[500px] rounded-full blur-[65px] sm:blur-[85px] opacity-70 bg-gradient-to-bl from-pink-300 via-rose-200 to-purple-200"></div>
 
-    <!-- Orb 3: Warm Peach / Champagne Sunlight (Center Glow) -->
-    <div class="orb orb-3 absolute top-[30%] left-[20%] w-[60vw] h-[60vw] max-w-[480px] max-h-[480px] rounded-full blur-[85px] sm:blur-[120px] opacity-50 bg-gradient-to-tr from-amber-100/70 via-orange-50/35 to-transparent"></div>
+    <!-- Bloom 3: Cyan Sky & Fresh Mint (Bottom Left) -->
+    <div class="orb orb-3 absolute -bottom-[10%] -left-[10%] w-[85vw] h-[85vw] max-w-[520px] max-h-[520px] rounded-full blur-[65px] sm:blur-[85px] opacity-65 bg-gradient-to-tr from-sky-200 via-cyan-200 to-teal-100"></div>
 
-    <!-- Orb 4: Soft Sky / Cyan Mist (Bottom Left) -->
-    <div class="orb orb-4 absolute -bottom-[10%] -left-[10%] w-[70vw] h-[70vw] max-w-[540px] max-h-[540px] rounded-full blur-[75px] sm:blur-[110px] opacity-65 bg-gradient-to-tr from-sky-200/70 via-blue-100/35 to-transparent"></div>
-
-    <!-- Orb 5: Soft Rose / Blossom (Bottom Right) -->
-    <div class="orb orb-5 absolute -bottom-[10%] -right-[10%] w-[65vw] h-[65vw] max-w-[500px] max-h-[500px] rounded-full blur-[80px] sm:blur-[115px] opacity-60 bg-gradient-to-tl from-rose-100/70 via-violet-100/35 to-transparent"></div>
+    <!-- Bloom 4: Golden Amber & Warm Peach (Bottom Right) -->
+    <div class="orb orb-4 absolute -bottom-[10%] -right-[10%] w-[80vw] h-[80vw] max-w-[480px] max-h-[480px] rounded-full blur-[65px] sm:blur-[85px] opacity-65 bg-gradient-to-tl from-amber-200 via-orange-100 to-pink-200"></div>
   </div>
 
   <!-- Ultra-subtle micro-dot noise pattern for paper/canvas texture depth -->
   <div 
-    class="absolute inset-0 opacity-[0.025]"
+    class="absolute inset-0 opacity-[0.03]"
     style="background-image: radial-gradient(#000000 1px, transparent 1px); background-size: 20px 20px;"
   ></div>
 </div>
 
 <style>
+  .ambient-mesh {
+    background: linear-gradient(135deg, #fafafa 0%, #f1f5f9 20%, #e0e7ff 45%, #fae8ff 70%, #fef3c7 90%, #fafafa 100%);
+    background-size: 300% 300%;
+    animation: meshShift 14s ease-in-out infinite alternate;
+  }
+
+  @keyframes meshShift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 50% 100%;
+    }
+  }
+
   .orb {
     will-change: transform;
     transform: translate3d(0, 0, 0);
@@ -36,46 +51,42 @@
   }
 
   .orb-1 {
-    animation: floatOrb1 20s ease-in-out infinite alternate;
+    animation: floatOrb1 9s ease-in-out infinite alternate;
   }
 
   .orb-2 {
-    animation: floatOrb2 24s ease-in-out infinite alternate;
+    animation: floatOrb2 11s ease-in-out infinite alternate;
   }
 
   .orb-3 {
-    animation: floatOrb3 28s ease-in-out infinite alternate;
+    animation: floatOrb3 10s ease-in-out infinite alternate;
   }
 
   .orb-4 {
-    animation: floatOrb4 22s ease-in-out infinite alternate;
-  }
-
-  .orb-5 {
-    animation: floatOrb5 26s ease-in-out infinite alternate;
+    animation: floatOrb4 12s ease-in-out infinite alternate;
   }
 
   @keyframes floatOrb1 {
     0% {
-      transform: translate3d(0px, 0px, 0) scale(1);
+      transform: translate3d(0px, 0px, 0) scale(1) rotate(0deg);
     }
     50% {
-      transform: translate3d(50px, 40px, 0) scale(1.08);
+      transform: translate3d(120px, 80px, 0) scale(1.18) rotate(45deg);
     }
     100% {
-      transform: translate3d(-30px, 70px, 0) scale(0.95);
+      transform: translate3d(-70px, 130px, 0) scale(0.92) rotate(90deg);
     }
   }
 
   @keyframes floatOrb2 {
     0% {
-      transform: translate3d(0px, 0px, 0) scale(1);
+      transform: translate3d(0px, 0px, 0) scale(1) rotate(0deg);
     }
     50% {
-      transform: translate3d(-60px, 45px, 0) scale(1.06);
+      transform: translate3d(-130px, 90px, 0) scale(1.15) rotate(-45deg);
     }
     100% {
-      transform: translate3d(30px, -35px, 0) scale(0.94);
+      transform: translate3d(60px, -70px, 0) scale(0.88) rotate(-90deg);
     }
   }
 
@@ -84,10 +95,10 @@
       transform: translate3d(0px, 0px, 0) scale(1);
     }
     50% {
-      transform: translate3d(-40px, -50px, 0) scale(1.1);
+      transform: translate3d(110px, -90px, 0) scale(1.16);
     }
     100% {
-      transform: translate3d(45px, 35px, 0) scale(0.92);
+      transform: translate3d(-60px, -110px, 0) scale(0.92);
     }
   }
 
@@ -96,28 +107,10 @@
       transform: translate3d(0px, 0px, 0) scale(1);
     }
     50% {
-      transform: translate3d(60px, -40px, 0) scale(1.05);
+      transform: translate3d(-100px, -80px, 0) scale(1.15);
     }
     100% {
-      transform: translate3d(-30px, -55px, 0) scale(0.95);
-    }
-  }
-
-  @keyframes floatOrb5 {
-    0% {
-      transform: translate3d(0px, 0px, 0) scale(1);
-    }
-    50% {
-      transform: translate3d(-45px, -45px, 0) scale(1.07);
-    }
-    100% {
-      transform: translate3d(35px, 40px, 0) scale(0.97);
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .orb {
-      animation: none !important;
+      transform: translate3d(80px, 60px, 0) scale(0.88);
     }
   }
 </style>
