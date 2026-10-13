@@ -25,6 +25,7 @@ interface ParsedSheetData {
   name?: string;
   handle?: string;
   bio?: string;
+  status?: { text: string };
 }
 
 function parseSheetJson(jsonText: string): ParsedSheetData | null {
@@ -42,6 +43,7 @@ function parseSheetJson(jsonText: string): ParsedSheetData | null {
     let customName: string | undefined;
     let customHandle: string | undefined;
     let customBio: string | undefined;
+    let customStatus: { text: string } | undefined;
 
     for (let i = 0; i < rows.length; i++) {
       const c = rows[i].c;
@@ -101,6 +103,18 @@ function parseSheetJson(jsonText: string): ParsedSheetData | null {
         continue;
       }
 
+      // 4. Status / Living Vibe configuration row
+      if (lowerId === 'status' || lowerId === 'vibe' || lowerId === 'mood') {
+        const statusText = (lowerTitle !== 'status' && lowerTitle !== 'vibe' && lowerTitle !== 'mood' ? title : '') || c[2]?.v?.toString()?.trim() || targetUrl;
+        if (statusText) customStatus = { text: statusText };
+        continue;
+      }
+      if (lowerTitle === 'status' || lowerTitle === 'vibe' || lowerTitle === 'trạng thái') {
+        const statusText = c[2]?.v?.toString()?.trim() || targetUrl;
+        if (statusText) customStatus = { text: statusText };
+        continue;
+      }
+
       if (!targetUrl) continue;
 
       const manualIcon = c[4]?.v?.toString()?.trim() || '';
@@ -144,6 +158,7 @@ function parseSheetJson(jsonText: string): ParsedSheetData | null {
       name: customName,
       handle: customHandle,
       bio: customBio,
+      status: customStatus,
     };
   } catch (err) {
     console.error('[LiveSync] Error parsing Google Sheet JSON:', err);
@@ -196,7 +211,26 @@ function updateDOM(data: ParsedSheetData) {
     }
   }
 
-  // 4. Update Link Cards
+  // 5. Update Status / Living Vibe
+  if (data.status) {
+    const statusTextEl = document.getElementById('header-status-text');
+    const statusContainer = document.getElementById('header-status-container');
+    if (statusTextEl) {
+      statusTextEl.setAttribute('data-bilingual', data.status.text);
+      const isEn = document.documentElement.lang === 'en';
+      if (data.status.text.includes('|')) {
+        const parts = data.status.text.split('|').map((s) => s.trim());
+        statusTextEl.textContent = isEn && parts[1] ? parts[1] : parts[0];
+      } else {
+        statusTextEl.textContent = data.status.text;
+      }
+    }
+    if (statusContainer) {
+      statusContainer.classList.remove('hidden');
+    }
+  }
+
+  // 6. Update Link Cards
   const container = document.getElementById('links-container');
   if (!container || !data.links || data.links.length === 0) return;
 
@@ -274,8 +308,8 @@ function updateDOM(data: ParsedSheetData) {
                   class="text-sm sm:text-base font-semibold text-slate-900 truncate group-hover:text-blue-600 transition-colors"
                 >${displayTitle}</h3>
                 ${link.pinned ? `
-                  <span class="inline-flex items-center justify-center w-5 h-5 rounded-full text-blue-600 bg-blue-50/90 border border-blue-200/70 shadow-sm flex-shrink-0" title="Được ghim" aria-label="Pinned">
-                    <svg class="w-2.5 h-2.5 fill-current transform rotate-45" viewBox="0 0 24 24"><path d="M16 12V4h1V2H7v2h1v8l-2 2v2h5.2v6h1.6v-6H18v-2l-2-2z"/></svg>
+                  <span class="text-slate-400 group-hover:text-blue-500 transition-colors flex-shrink-0" title="Được ghim" aria-label="Pinned">
+                    <svg class="w-3.5 h-3.5 fill-current transform rotate-45" viewBox="0 0 24 24"><path d="M16 12V4h1V2H7v2h1v8l-2 2v2h5.2v6h1.6v-6H18v-2l-2-2z"/></svg>
                   </span>
                 ` : ''}
               </div>

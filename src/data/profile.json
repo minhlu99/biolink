@@ -4,6 +4,9 @@
   "bio": "Mô tả ngắn gọn về bản thân hoặc lĩnh vực hoạt động ✨",
   "avatar": "/avatar.webp",
   "verified": true,
+  "status": {
+    "text": "Day Off Chill ☕ | Day Off Chill ☕"
+  },
   "socials": [],
   "links": []
 }

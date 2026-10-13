@@ -36,16 +36,21 @@ const { profile } = Astro.props;
   </div>
 
   <!-- Live Status Badge (if available) -->
-  {profile.status && (
-    <div class="inline-flex items-center gap-2 px-3 py-1 mb-3 rounded-full text-xs font-medium bg-white/85 backdrop-blur-md border border-slate-200/80 text-slate-700 shadow-sm">
-      <span class="flex items-end gap-0.5 h-3">
-        <span class="w-0.5 bg-emerald-500 rounded-full vibe-bar-1"></span>
-        <span class="w-0.5 bg-emerald-500 rounded-full vibe-bar-2"></span>
-        <span class="w-0.5 bg-emerald-500 rounded-full vibe-bar-3"></span>
-      </span>
-      <span data-bilingual={profile.status.text}>{profile.status.text.split('|')[0].trim()}</span>
-    </div>
-  )}
+  <div id="header-status-container" class={!profile.status ? 'hidden' : ''}>
+    {profile.status && (
+      <div 
+        id="header-status-badge" 
+        class="inline-flex items-center gap-2 px-3 py-1 mb-3 rounded-full text-xs font-medium bg-white/85 backdrop-blur-md border border-slate-200/80 text-slate-700 shadow-sm transition-all hover:bg-white"
+      >
+        <span class="flex items-end gap-0.5 h-3" aria-hidden="true">
+          <span class="w-0.5 bg-emerald-500 rounded-full vibe-bar-1"></span>
+          <span class="w-0.5 bg-emerald-500 rounded-full vibe-bar-2"></span>
+          <span class="w-0.5 bg-emerald-500 rounded-full vibe-bar-3"></span>
+        </span>
+        <span id="header-status-text" data-bilingual={profile.status.text}>{profile.status.text.split('|')[0].trim()}</span>
+      </div>
+    )}
+  </div>
 
   <!-- Name & Verified Rosette Seal (Modern Creator Standard) -->
   <div class="inline-flex items-center justify-center gap-1.5 mb-1 flex-wrap">
@@ -54,33 +59,30 @@ const { profile } = Astro.props;
     </h1>
     {profile.verified && (
       <span 
-        class="inline-flex items-center justify-center cursor-pointer group/seal relative transform hover:scale-115 hover:rotate-6 transition-all duration-300 active:scale-95"
+        class="inline-flex items-center justify-center cursor-pointer group/seal relative transform hover:scale-115 hover:rotate-6 transition-all duration-300 active:scale-95 -translate-y-0.5"
         title="Tài khoản chính chủ đã xác minh"
         aria-label="Tài khoản chính chủ đã xác minh"
       >
         <svg 
-          class="w-5 h-5 sm:w-6 sm:h-6 drop-shadow-[0_2px_8px_rgba(37,99,235,0.4)]" 
-          viewBox="0 0 24 24" 
+          class="w-5 h-5 sm:w-6 sm:h-6 animate-verified-pulse" 
+          viewBox="0 0 22 22" 
           fill="none"
         >
-          <!-- Authentic 8-point symmetrical rosette seal -->
+          <!-- Official symmetrical rosette seal -->
           <path 
             fill="url(#name-verified-seal)" 
-            d="M22.25 12c0-1.43-.88-2.67-2.19-3.21.2-1.41-.35-2.83-1.47-3.79s-2.58-1.22-3.97-.68C13.88 3.1 12.56 2.5 11.16 2.5s-2.72.6-3.46 1.82c-1.39-.54-2.85-.28-3.97.68S2.08 7.36 2.28 8.79C.97 9.33.09 10.57.09 12s.88 2.67 2.19 3.21c-.2 1.41.35 2.83 1.47 3.79s2.58 1.22 3.97.68c.74 1.22 2.06 1.82 3.46 1.82s2.72-.6 3.46-1.82c1.39.54 2.85.28 3.97-.68s1.67-2.38 1.47-3.79c1.31-.54 2.19-1.78 2.19-3.21z"
+            d="M20.396 11c-.018-.646-.215-1.275-.57-1.816-.354-.54-.852-.972-1.438-1.246.223-.607.27-1.264.14-1.897-.131-.634-.437-1.218-.887-1.687-.47-.45-1.054-.755-1.687-.887-.633-.13-1.29-.083-1.897.14-.273-.587-.704-1.086-1.245-1.44S11.647 1.62 11 1.604c-.646.017-1.273.213-1.813.568s-.969.854-1.24 1.44c-.608-.223-1.267-.272-1.902-.14-.635.13-1.22.436-1.69.887-.45.47-.756 1.056-.888 1.69-.13.634-.084 1.292.14 1.899-.586.273-1.084.704-1.438 1.246-.354.54-.551 1.17-.569 1.816.018.646.215 1.274.569 1.815.354.542.852.973 1.438 1.247-.224.607-.27 1.265-.14 1.898.132.634.437 1.218.888 1.687.47.45 1.055.755 1.69.887.635.13 1.294.083 1.902-.14.271.587.702 1.086 1.24 1.44.54.355 1.167.551 1.813.569.647-.018 1.274-.214 1.814-.569.541-.354.972-.853 1.245-1.44.607.223 1.264.27 1.897.14.633-.132 1.217-.437 1.687-.887.45-.47.756-1.053.887-1.687.13-.633.083-1.29-.14-1.898.586-.274 1.084-.705 1.438-1.246.355-.541.552-1.17.57-1.815z"
           />
-          <!-- Centered, beautifully proportioned rounded checkmark -->
+          <!-- Authentic centered cutout checkmark -->
           <path 
-            d="M8.2 12.2l2.6 2.6 5.4-5.6" 
-            stroke="#ffffff" 
-            stroke-width="2.3" 
-            stroke-linecap="round" 
-            stroke-linejoin="round"
+            d="M9.684 15.808l-4.228-4.228 1.414-1.414 2.814 2.814 6.814-6.814 1.414 1.414-8.228 8.228z" 
+            fill="#ffffff"
           />
           <defs>
-            <linearGradient id="name-verified-seal" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+            <linearGradient id="name-verified-seal" x1="2" y1="2" x2="20" y2="20" gradientUnits="userSpaceOnUse">
               <stop stop-color="#38bdf8"/>
-              <stop offset="0.6" stop-color="#2563eb"/>
-              <stop offset="1" stop-color="#1d4ed8"/>
+              <stop offset="0.55" stop-color="#0284c7"/>
+              <stop offset="1" stop-color="#0369a1"/>
             </linearGradient>
           </defs>
         </svg>

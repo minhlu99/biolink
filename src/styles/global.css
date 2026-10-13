@@ -239,3 +239,19 @@
 .vibe-bar-1 { animation: vibeWave 0.9s ease-in-out infinite; }
 .vibe-bar-2 { animation: vibeWave 1.2s ease-in-out 0.25s infinite; }
 .vibe-bar-3 { animation: vibeWave 0.8s ease-in-out 0.5s infinite; }
+
+/* Authentic Verified Badge Ambient Pulse & Glow */
+@keyframes verifiedPulse {
+  0%, 100% {
+    filter: drop-shadow(0 2px 6px rgba(14, 165, 233, 0.35));
+    transform: scale(1);
+  }
+  50% {
+    filter: drop-shadow(0 2px 14px rgba(14, 165, 233, 0.75));
+    transform: scale(1.04);
+  }
+}
+
+.animate-verified-pulse {
+  animation: verifiedPulse 3.5s ease-in-out infinite;
+}

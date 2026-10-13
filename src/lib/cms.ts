@@ -30,6 +30,7 @@ interface SheetFetchResult {
   name?: string;
   handle?: string;
   bio?: string;
+  status?: { text: string };
 }
 
 /**
@@ -70,6 +71,7 @@ export async function fetchFromGoogleSheets(sheetId: string): Promise<SheetFetch
     let customName: string | undefined;
     let customHandle: string | undefined;
     let customBio: string | undefined;
+    let customStatus: { text: string } | undefined;
 
     for (let i = 0; i < rows.length; i++) {
       const c = rows[i].c;
@@ -130,6 +132,18 @@ export async function fetchFromGoogleSheets(sheetId: string): Promise<SheetFetch
         continue;
       }
 
+      // 4. Status / Living Vibe configuration row
+      if (lowerId === 'status' || lowerId === 'vibe' || lowerId === 'mood') {
+        const statusText = (lowerTitle !== 'status' && lowerTitle !== 'vibe' && lowerTitle !== 'mood' ? title : '') || c[2]?.v?.toString()?.trim() || targetUrl;
+        if (statusText) customStatus = { text: statusText };
+        continue;
+      }
+      if (lowerTitle === 'status' || lowerTitle === 'vibe' || lowerTitle === 'trạng thái') {
+        const statusText = c[2]?.v?.toString()?.trim() || targetUrl;
+        if (statusText) customStatus = { text: statusText };
+        continue;
+      }
+
       // If it's a regular link, targetUrl is required
       if (!targetUrl) continue;
 
@@ -177,6 +191,7 @@ export async function fetchFromGoogleSheets(sheetId: string): Promise<SheetFetch
       name: customName,
       handle: customHandle,
       bio: customBio,
+      status: customStatus,
     };
   } catch (error) {
     console.error('[CMS] Error fetching from Google Sheets:', error);
@@ -200,6 +215,7 @@ export async function getProfileData(): Promise<Profile> {
       name: sheetData.name !== undefined ? sheetData.name : profile.name,
       handle: sheetData.handle !== undefined ? sheetData.handle : profile.handle,
       bio: sheetData.bio !== undefined ? sheetData.bio : profile.bio,
+      status: sheetData.status !== undefined ? sheetData.status : profile.status,
     };
   }
 

@@ -49,14 +49,14 @@ const isEmail = iconKey === 'email';
           {link.title.split('|')[0].trim()}
         </h3>
 
-        <!-- Pinned Icon Badge if enabled (Modern standard: icon only) -->
+        <!-- Pinned Icon Badge if enabled (Modern standard: sleek micro-emblem) -->
         {link.pinned && (
           <span 
-            class="inline-flex items-center justify-center w-5 h-5 rounded-full text-blue-600 bg-blue-50/90 border border-blue-200/70 shadow-sm flex-shrink-0" 
+            class="text-slate-400 group-hover:text-blue-500 transition-colors flex-shrink-0" 
             title="Được ghim"
             aria-label="Pinned"
           >
-            <svg class="w-2.5 h-2.5 fill-current transform rotate-45" viewBox="0 0 24 24">
+            <svg class="w-3.5 h-3.5 fill-current transform rotate-45" viewBox="0 0 24 24">
               <path d="M16 12V4h1V2H7v2h1v8l-2 2v2h5.2v6h1.6v-6H18v-2l-2-2z"/>
             </svg>
           </span>
