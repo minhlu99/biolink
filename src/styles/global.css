@@ -19,29 +19,41 @@
   }
 }
 
-/* Modern Apple / Linear style liquid glass cards over ambient gradient */
+/* Modern Apple / iOS 18 style Liquid Glass (Translucent Frosted Acrylic) */
 .link-card {
   position: relative;
-  background: rgba(255, 255, 255, 0.78);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.85);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.52) 0%,
+    rgba(255, 255, 255, 0.25) 100%
+  );
+  backdrop-filter: blur(20px) saturate(190%);
+  -webkit-backdrop-filter: blur(20px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-top-color: rgba(255, 255, 255, 0.95);
+  border-bottom-color: rgba(226, 232, 240, 0.45);
   box-shadow: 
-    inset 0 1px 1px 0 rgba(255, 255, 255, 0.95),
-    0 4px 16px -2px rgba(15, 23, 42, 0.05),
-    0 1px 3px rgba(15, 23, 42, 0.02);
+    inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1px 1px 0 rgba(0, 0, 0, 0.02),
+    0 8px 32px -4px rgba(15, 23, 42, 0.06),
+    0 2px 6px -1px rgba(15, 23, 42, 0.02);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
 }
 
 .link-card:hover {
-  background: rgba(255, 255, 255, 0.94);
-  border-color: rgba(255, 255, 255, 1);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.72) 0%,
+    rgba(255, 255, 255, 0.42) 100%
+  );
+  border-color: rgba(255, 255, 255, 0.95);
+  border-top-color: #ffffff;
   transform: translateY(-2px);
   box-shadow: 
-    inset 0 1px 1px 0 rgba(255, 255, 255, 1),
-    0 14px 32px -4px rgba(59, 130, 246, 0.12),
-    0 4px 10px -2px rgba(15, 23, 42, 0.04);
+    inset 0 1px 2px 0 #ffffff,
+    0 16px 36px -4px rgba(59, 130, 246, 0.14),
+    0 4px 12px -2px rgba(15, 23, 42, 0.04);
 }
 
 /* Interactive Cursor Spotlight (Linear / Stripe aesthetic) */

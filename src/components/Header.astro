@@ -33,14 +33,22 @@ const { profile } = Astro.props;
       />
     </div>
 
-    <!-- Verified Badge if enabled -->
+    <!-- Verified Rosette Seal on Avatar -->
     {profile.verified && (
       <div 
-        class="absolute bottom-1.5 right-1.5 bg-blue-500 text-white p-1 rounded-full shadow-md border-2 border-white flex items-center justify-center z-10"
+        class="absolute bottom-1 right-1 p-0.5 rounded-full bg-white shadow-md shadow-blue-500/25 flex items-center justify-center z-10 transform group-hover:scale-110 transition-transform duration-300 ring-2 ring-white"
         title="Đã xác minh"
       >
-        <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20">
-          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+        <svg class="w-4 h-4 sm:w-4.5 sm:h-4.5" viewBox="0 0 24 24" fill="none">
+          <path fill="url(#avatar-verified-seal)" d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.79-4-4-4-.495 0-.965.084-1.4.238C14.55 2.475 13.18 1.6 11.6 1.6c-1.58 0-2.95.875-3.6 2.148-.435-.154-.905-.238-1.4-.238-2.21 0-4 1.79-4 4 0 .495.084.965.238 1.4C1.575 10.45.7 11.82.7 13.4c0 1.58.875 2.95 2.148 3.6-.154.435-.238.905-.238 1.4 0 2.21 1.79 4 4 4 .495 0 .965-.084 1.4-.238 1.247 1.273 2.617 2.148 4.19 2.148 1.58 0 2.95-.875 3.6-2.148.435.154.905.238 1.4.238 2.21 0 4-1.79 4-4 0-.495-.084-.965-.238-1.4 1.273-1.25 2.148-2.62 2.148-4.2z" />
+          <path fill="#ffffff" d="M9.8 16.6l-3.9-3.9 1.4-1.4 2.5 2.5 6.5-6.5 1.4 1.4-7.9 7.9z" />
+          <defs>
+            <linearGradient id="avatar-verified-seal" x1="1" y1="1" x2="23" y2="23" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#38bdf8"/>
+              <stop offset="0.5" stop-color="#2563eb"/>
+              <stop offset="1" stop-color="#1d4ed8"/>
+            </linearGradient>
+          </defs>
         </svg>
       </div>
     )}
@@ -58,10 +66,41 @@ const { profile } = Astro.props;
     </div>
   )}
 
-  <!-- Name & Handle -->
-  <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-slate-900 via-slate-800 to-indigo-950 drop-shadow-sm mb-1">
-    {profile.name}
-  </h1>
+  <!-- Name & Verified Rosette Seal (Modern Creator Standard) -->
+  <div class="inline-flex items-center justify-center gap-1.5 mb-1 flex-wrap">
+    <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-slate-900 via-slate-800 to-indigo-950 drop-shadow-sm">
+      {profile.name}
+    </h1>
+    {profile.verified && (
+      <span 
+        class="inline-flex items-center justify-center cursor-pointer group/seal relative transform hover:scale-115 hover:rotate-6 transition-all duration-300 active:scale-95"
+        title="Tài khoản chính chủ đã xác minh"
+        aria-label="Tài khoản chính chủ đã xác minh"
+      >
+        <svg 
+          class="w-5 h-5 sm:w-6 sm:h-6 drop-shadow-[0_2px_8px_rgba(37,99,235,0.45)]" 
+          viewBox="0 0 24 24" 
+          fill="none"
+        >
+          <path 
+            fill="url(#name-verified-seal)" 
+            d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.79-4-4-4-.495 0-.965.084-1.4.238C14.55 2.475 13.18 1.6 11.6 1.6c-1.58 0-2.95.875-3.6 2.148-.435-.154-.905-.238-1.4-.238-2.21 0-4 1.79-4 4 0 .495.084.965.238 1.4C1.575 10.45.7 11.82.7 13.4c0 1.58.875 2.95 2.148 3.6-.154.435-.238.905-.238 1.4 0 2.21 1.79 4 4 4 .495 0 .965-.084 1.4-.238 1.247 1.273 2.617 2.148 4.19 2.148 1.58 0 2.95-.875 3.6-2.148.435.154.905.238 1.4.238 2.21 0 4-1.79 4-4 0-.495-.084-.965-.238-1.4 1.273-1.25 2.148-2.62 2.148-4.2z" 
+          />
+          <path 
+            fill="#ffffff" 
+            d="M9.8 16.6l-3.9-3.9 1.4-1.4 2.5 2.5 6.5-6.5 1.4 1.4-7.9 7.9z" 
+          />
+          <defs>
+            <linearGradient id="name-verified-seal" x1="1" y1="1" x2="23" y2="23" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#38bdf8"/>
+              <stop offset="0.5" stop-color="#2563eb"/>
+              <stop offset="1" stop-color="#1d4ed8"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </span>
+    )}
+  </div>
   <p 
     id="header-handle" 
     class={`text-sm font-medium text-slate-500 mb-3 ${!profile.handle ? 'hidden' : ''}`}
