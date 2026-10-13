@@ -35,15 +35,29 @@ const sheetId = import.meta.env.PUBLIC_GOOGLE_SHEET_ID || '';
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <meta name="generator" content={Astro.generator} />
+    <!-- Preload Critical LCP Avatar Image -->
+    <link rel="preload" as="image" href={profile.avatar || '/avatar.webp'} type="image/webp" fetchpriority="high" />
 
-    <!-- Google Fonts: Plus Jakarta Sans with full Vietnamese & Latin character set -->
+    <!-- Google Fonts: Plus Jakarta Sans (Non-blocking async load with instant system fallback) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link 
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" 
-      rel="stylesheet" 
+      rel="preload" 
+      as="style" 
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" 
     />
+    <link 
+      rel="stylesheet" 
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" 
+      media="print" 
+      onload="this.media='all'" 
+    />
+    <noscript>
+      <link 
+        rel="stylesheet" 
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" 
+      />
+    </noscript>
 
     <!-- SEO & Social OpenGraph Meta Tags -->
     <title>{profile.name} {profile.handle ? `| ${profile.handle}` : ''}</title>
@@ -113,7 +127,13 @@ const sheetId = import.meta.env.PUBLIC_GOOGLE_SHEET_ID || '';
       <script>
         import { initLiveSync } from '../lib/liveSync';
         const sheetId = document.body.dataset.sheetId;
-        if (sheetId) initLiveSync(sheetId);
+        if (sheetId) {
+          if ('requestIdleCallback' in window) {
+            requestIdleCallback(() => initLiveSync(sheetId));
+          } else {
+            setTimeout(() => initLiveSync(sheetId), 400);
+          }
+        }
       </script>
     )}
   </body>

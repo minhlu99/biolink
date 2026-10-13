@@ -16,6 +16,10 @@ const { profile } = Astro.props;
       <img
         src={profile.avatar || '/avatar.webp'}
         alt={profile.name}
+        width="144"
+        height="144"
+        decoding="async"
+        fetchpriority="high"
         class="w-full h-full object-cover rounded-full transform group-hover:scale-105 transition duration-300"
         loading="eager"
       />
