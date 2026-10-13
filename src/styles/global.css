@@ -239,23 +239,3 @@
 .vibe-bar-1 { animation: vibeWave 0.9s ease-in-out infinite; }
 .vibe-bar-2 { animation: vibeWave 1.2s ease-in-out 0.25s infinite; }
 .vibe-bar-3 { animation: vibeWave 0.8s ease-in-out 0.5s infinite; }
-
-/* Clean X (Twitter) verified badge simple micro-animation */
-@keyframes badgeBreathe {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-}
-
-.animate-badge-breathe {
-  animation: badgeBreathe 3s ease-in-out infinite;
-  transform-origin: center;
-}
-
-.animate-badge-breathe:hover {
-  animation-play-state: paused;
-  transform: scale(1.12);
-}
