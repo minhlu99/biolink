@@ -273,14 +273,8 @@ function updateDOM(data: ParsedSheetData) {
                   class="text-sm sm:text-base font-semibold text-slate-900 truncate group-hover:text-blue-600 transition-colors"
                 >${displayTitle}</h3>
                 ${link.pinned ? `
-                  <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200/80">
-                    <svg class="w-2.5 h-2.5 fill-current" viewBox="0 0 24 24"><path d="M16 12V4h1V2H7v2h1v8l-2 2v2h5.2v6h1.6v-6H18v-2l-2-2z"/></svg>
-                    <span data-i18n="pinned">${isEn ? 'Pinned' : 'Ghim'}</span>
-                  </span>
-                ` : ''}
-                ${link.highlight ? `
-                  <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white shadow-sm">
-                    <span data-i18n="hot">Hot</span>
+                  <span class="inline-flex items-center justify-center w-5 h-5 rounded-full text-blue-600 bg-blue-50/90 border border-blue-200/70 shadow-sm flex-shrink-0" title="Được ghim" aria-label="Pinned">
+                    <svg class="w-2.5 h-2.5 fill-current transform rotate-45" viewBox="0 0 24 24"><path d="M16 12V4h1V2H7v2h1v8l-2 2v2h5.2v6h1.6v-6H18v-2l-2-2z"/></svg>
                   </span>
                 ` : ''}
               </div>
@@ -306,6 +300,7 @@ function updateDOM(data: ParsedSheetData) {
               </svg>
             `}
           </div>
+          ${link.highlight ? '<span class="highlight-sheen" aria-hidden="true"></span>' : ''}
         </a>
       `;
     }
