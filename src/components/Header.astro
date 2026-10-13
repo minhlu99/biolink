@@ -14,7 +14,7 @@ const { profile } = Astro.props;
     <!-- Subtle soft shadow -->
     <div class="relative w-28 h-28 sm:w-36 sm:h-36 rounded-full overflow-hidden border-4 border-white bg-white shadow-xl shadow-slate-200/60 p-0.5">
       <img
-        src={profile.avatar || '/avatar.svg'}
+        src={profile.avatar || '/avatar.webp'}
         alt={profile.name}
         class="w-full h-full object-cover rounded-full transform group-hover:scale-105 transition duration-300"
         loading="eager"
