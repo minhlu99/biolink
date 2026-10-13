@@ -61,7 +61,7 @@ const processedSocials = socials
           rel={isCall || isMail ? undefined : 'noopener noreferrer'}
           aria-label={item.label || iconDef.name}
           title={item.label || iconDef.name}
-          class={`group relative p-2.5 rounded-full bg-white border border-slate-200 text-slate-600 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md active:scale-90 ${iconDef.brandColor || 'hover:text-blue-600'}`}
+          class={`group relative p-2.5 rounded-full bg-white/80 backdrop-blur-md border border-white/90 text-slate-600 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md hover:bg-white active:scale-90 ${iconDef.brandColor || 'hover:text-blue-600'}`}
         >
           <svg
             class="w-5 h-5 fill-current transition-transform duration-200 group-hover:scale-110"

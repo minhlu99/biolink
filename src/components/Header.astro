@@ -11,8 +11,14 @@ const { profile } = Astro.props;
 <header class="flex flex-col items-center text-center pt-8 pb-5 px-4 w-full">
   <!-- Avatar Container (Size: 112px - 144px) -->
   <div class="relative group cursor-pointer mb-4">
-    <!-- Subtle soft shadow -->
-    <div class="relative w-28 h-28 sm:w-36 sm:h-36 rounded-full overflow-hidden border-4 border-white bg-white shadow-xl shadow-slate-200/60 p-0.5">
+    <!-- Dynamic Breathing Iridescent Halo Aura -->
+    <div 
+      class="absolute -inset-1 sm:-inset-1.5 rounded-full bg-gradient-to-tr from-indigo-500 via-pink-400 to-amber-300 opacity-70 blur-md group-hover:opacity-100 group-hover:scale-105 group-hover:blur-lg transition-all duration-500 animate-halo-pulse pointer-events-none"
+      aria-hidden="true"
+    ></div>
+
+    <!-- Soft specular frame -->
+    <div class="relative w-28 h-28 sm:w-36 sm:h-36 rounded-full overflow-hidden border-4 border-white/95 bg-white shadow-xl shadow-slate-200/60 p-0.5">
       <img
         src={profile.avatar || '/avatar.webp'}
         srcset={(!profile.avatar || profile.avatar === '/avatar.webp') ? '/avatar-144.webp 144w, /avatar.webp 288w' : undefined}
@@ -30,7 +36,7 @@ const { profile } = Astro.props;
     <!-- Verified Badge if enabled -->
     {profile.verified && (
       <div 
-        class="absolute bottom-1.5 right-1.5 bg-blue-500 text-white p-1 rounded-full shadow-md border-2 border-white flex items-center justify-center"
+        class="absolute bottom-1.5 right-1.5 bg-blue-500 text-white p-1 rounded-full shadow-md border-2 border-white flex items-center justify-center z-10"
         title="Đã xác minh"
       >
         <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20">
@@ -42,17 +48,18 @@ const { profile } = Astro.props;
 
   <!-- Live Status Badge (if available) -->
   {profile.status && (
-    <div class="inline-flex items-center gap-2 px-3 py-1 mb-3 rounded-full text-xs font-medium bg-white border border-slate-200/80 text-slate-700 shadow-sm">
-      <span class="relative flex h-2 w-2">
-        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-        <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+    <div class="inline-flex items-center gap-2 px-3 py-1 mb-3 rounded-full text-xs font-medium bg-white/85 backdrop-blur-md border border-slate-200/80 text-slate-700 shadow-sm">
+      <span class="flex items-end gap-0.5 h-3">
+        <span class="w-0.5 bg-emerald-500 rounded-full vibe-bar-1"></span>
+        <span class="w-0.5 bg-emerald-500 rounded-full vibe-bar-2"></span>
+        <span class="w-0.5 bg-emerald-500 rounded-full vibe-bar-3"></span>
       </span>
       <span data-bilingual={profile.status.text}>{profile.status.text.split('|')[0].trim()}</span>
     </div>
   )}
 
   <!-- Name & Handle -->
-  <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 mb-1">
+  <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-slate-900 via-slate-800 to-indigo-950 drop-shadow-sm mb-1">
     {profile.name}
   </h1>
   <p 

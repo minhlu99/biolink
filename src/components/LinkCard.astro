@@ -24,7 +24,10 @@ const isEmail = iconKey === 'email';
       : 'link-card'
   }`}
 >
-  <div class="flex items-center gap-3.5 min-w-0 pr-2">
+  <!-- Interactive mouse spotlight layer -->
+  <span class="card-spotlight" aria-hidden="true" />
+
+  <div class="flex items-center gap-3.5 min-w-0 pr-2 relative z-10">
     <!-- Full Icon (Borderless, prominent size ~32px) -->
     <div class="flex-shrink-0 flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9">
       <svg
@@ -72,7 +75,7 @@ const isEmail = iconKey === 'email';
   </div>
 
   <!-- Arrow Right / Action Indicator -->
-  <div class="flex-shrink-0 text-slate-400 group-hover:text-blue-600 transition-all duration-200 transform group-hover:translate-x-1 pl-2">
+  <div class="flex-shrink-0 text-slate-400 group-hover:text-blue-600 transition-all duration-200 transform group-hover:translate-x-1 pl-2 relative z-10">
     {isPhone ? (
       <span 
         data-i18n="callNow"

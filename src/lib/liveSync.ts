@@ -257,7 +257,8 @@ function updateDOM(data: ParsedSheetData) {
           ${targetAttr}
           class="group relative flex items-center justify-between p-4 sm:p-4.5 rounded-2xl w-full transition-all duration-200 active:scale-[0.99] ${cardClass}"
         >
-          <div class="flex items-center gap-3.5 min-w-0 pr-2">
+          <span class="card-spotlight" aria-hidden="true"></span>
+          <div class="flex items-center gap-3.5 min-w-0 pr-2 relative z-10">
             <div class="flex-shrink-0 flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9">
               <svg
                 class="w-7 h-7 sm:w-8 sm:h-8 transition-transform duration-200 group-hover:scale-110 drop-shadow-sm ${iconDef.brandColor || 'text-slate-800'}"
@@ -285,7 +286,7 @@ function updateDOM(data: ParsedSheetData) {
               ` : ''}
             </div>
           </div>
-          <div class="flex-shrink-0 text-slate-400 group-hover:text-blue-600 transition-all duration-200 transform group-hover:translate-x-1 pl-2">
+          <div class="flex-shrink-0 text-slate-400 group-hover:text-blue-600 transition-all duration-200 transform group-hover:translate-x-1 pl-2 relative z-10">
             ${isPhone ? `
               <span data-i18n="callNow" class="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200/80 shadow-sm">
                 ${isEn ? 'Call now' : 'Gọi ngay'}

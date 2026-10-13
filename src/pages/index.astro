@@ -128,5 +128,19 @@ const sheetId = import.meta.env.PUBLIC_GOOGLE_SHEET_ID || '';
         }
       </script>
     )}
+
+    <!-- Interactive cursor spotlight for cards (Linear / Stripe aesthetic) -->
+    <script>
+      const linksContainer = document.getElementById('links-container');
+      if (linksContainer) {
+        linksContainer.addEventListener('mousemove', (e: MouseEvent) => {
+          const card = (e.target as HTMLElement)?.closest('.link-card, .highlight-border-light') as HTMLElement | null;
+          if (!card) return;
+          const rect = card.getBoundingClientRect();
+          card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+          card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+        }, { passive: true });
+      }
+    </script>
   </body>
 </html>
