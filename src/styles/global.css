@@ -240,18 +240,22 @@
 .vibe-bar-2 { animation: vibeWave 1.2s ease-in-out 0.25s infinite; }
 .vibe-bar-3 { animation: vibeWave 0.8s ease-in-out 0.5s infinite; }
 
-/* Authentic Verified Badge Ambient Pulse & Glow */
-@keyframes verifiedPulse {
+/* Clean X (Twitter) verified badge simple micro-animation */
+@keyframes badgeBreathe {
   0%, 100% {
-    filter: drop-shadow(0 2px 6px rgba(14, 165, 233, 0.35));
     transform: scale(1);
   }
   50% {
-    filter: drop-shadow(0 2px 14px rgba(14, 165, 233, 0.75));
-    transform: scale(1.04);
+    transform: scale(1.05);
   }
 }
 
-.animate-verified-pulse {
-  animation: verifiedPulse 3.5s ease-in-out infinite;
+.animate-badge-breathe {
+  animation: badgeBreathe 3s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.animate-badge-breathe:hover {
+  animation-play-state: paused;
+  transform: scale(1.12);
 }

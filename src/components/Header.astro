@@ -59,32 +59,25 @@ const { profile } = Astro.props;
     </h1>
     {profile.verified && (
       <span 
-        class="inline-flex items-center justify-center cursor-pointer group/seal relative transform hover:scale-115 hover:rotate-6 transition-all duration-300 active:scale-95 -translate-y-0.5"
+        class="inline-flex items-center justify-center cursor-pointer relative -translate-y-0.5 sm:-translate-y-1 transition-transform duration-200"
         title="Tài khoản chính chủ đã xác minh"
         aria-label="Tài khoản chính chủ đã xác minh"
       >
         <svg 
-          class="w-5 h-5 sm:w-6 sm:h-6 animate-verified-pulse" 
-          viewBox="0 0 22 22" 
-          fill="none"
+          class="w-5 h-5 sm:w-5.5 sm:h-5.5 animate-badge-breathe" 
+          viewBox="0 0 24 24" 
+          aria-hidden="true"
         >
-          <!-- Official symmetrical rosette seal -->
+          <!-- Authentic X (Twitter) verified rosette -->
           <path 
-            fill="url(#name-verified-seal)" 
-            d="M20.396 11c-.018-.646-.215-1.275-.57-1.816-.354-.54-.852-.972-1.438-1.246.223-.607.27-1.264.14-1.897-.131-.634-.437-1.218-.887-1.687-.47-.45-1.054-.755-1.687-.887-.633-.13-1.29-.083-1.897.14-.273-.587-.704-1.086-1.245-1.44S11.647 1.62 11 1.604c-.646.017-1.273.213-1.813.568s-.969.854-1.24 1.44c-.608-.223-1.267-.272-1.902-.14-.635.13-1.22.436-1.69.887-.45.47-.756 1.056-.888 1.69-.13.634-.084 1.292.14 1.899-.586.273-1.084.704-1.438 1.246-.354.54-.551 1.17-.569 1.816.018.646.215 1.274.569 1.815.354.542.852.973 1.438 1.247-.224.607-.27 1.265-.14 1.898.132.634.437 1.218.888 1.687.47.45 1.055.755 1.69.887.635.13 1.294.083 1.902-.14.271.587.702 1.086 1.24 1.44.54.355 1.167.551 1.813.569.647-.018 1.274-.214 1.814-.569.541-.354.972-.853 1.245-1.44.607.223 1.264.27 1.897.14.633-.132 1.217-.437 1.687-.887.45-.47.756-1.053.887-1.687.13-.633.083-1.29-.14-1.898.586-.274 1.084-.705 1.438-1.246.355-.541.552-1.17.57-1.815z"
+            fill="#1d9bf0" 
+            d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.66-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.33 2.19c-1.4-.46-2.91-.2-3.92.81s-1.26 2.52-.8 3.91c-1.31.67-2.2 1.91-2.2 3.34s.89 2.67 2.2 3.34c-.46 1.39-.21 2.9.8 3.91s2.52 1.26 3.91.81c.67 1.31 1.91 2.19 3.34 2.19s2.68-.88 3.34-2.19c1.39.45 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34z"
           />
-          <!-- Authentic centered cutout checkmark -->
+          <!-- Authentic X (Twitter) white checkmark -->
           <path 
-            d="M9.684 15.808l-4.228-4.228 1.414-1.414 2.814 2.814 6.814-6.814 1.414 1.414-8.228 8.228z" 
-            fill="#ffffff"
+            fill="#ffffff" 
+            d="M10.54 16.2L6.8 12.46l1.41-1.42 2.26 2.26 4.8-5.23 1.47 1.36-6.2 6.77z"
           />
-          <defs>
-            <linearGradient id="name-verified-seal" x1="2" y1="2" x2="20" y2="20" gradientUnits="userSpaceOnUse">
-              <stop stop-color="#38bdf8"/>
-              <stop offset="0.55" stop-color="#0284c7"/>
-              <stop offset="1" stop-color="#0369a1"/>
-            </linearGradient>
-          </defs>
         </svg>
       </span>
     )}
