@@ -62,13 +62,14 @@ Mở trình duyệt tại: `http://localhost:4321`
 - **Cột `highlight`**: `TRUE` để có viền phát sáng gradient và badge `HOT`.
 - **Cột `active`**: `TRUE` để hiển thị, `FALSE` để ẩn link.
 
-### 🖼️ Cập nhật Avatar, Tên & Bio từ Google Sheet:
-Thêm các hàng cấu hình đặc biệt vào bảng tính:
+### 🖼️ Cập nhật Avatar, Tên, Username & Bio từ Google Sheet:
+Thêm các hàng cấu hình đặc biệt vào bảng tính (giá trị có thể điền vào cột `title`, `subtitle` hoặc `url` đều được):
 | id | title | subtitle | url | active |
 |:---|:---|:---|:---|:---|
-| **avatar** | Ảnh đại diện | | **https://link-anh.com/avatar.webp** *(hoặc link Google Drive)* | **TRUE** |
+| **name** | Nhím | | | **TRUE** |
+| **username** | @nhimnguyen99 | *(hoặc bỏ trống nếu không muốn hiện)* | | **TRUE** |
 | **bio** | Giới thiệu | **Software Engineer & Builder ✨ \| Developer & Creator** | | **TRUE** |
-| **name** | Họ và Tên | **Nguyễn Văn A** | | **TRUE** |
+| **avatar** | Ảnh đại diện | | **https://link-anh.com/avatar.webp** *(hoặc link Google Drive)* | **TRUE** |
 
 #### 📐 Tiêu chuẩn Avatar tối ưu nhất:
 - **Định dạng**: **`.webp`** (nhẹ hơn JPG 35%, hiển thị sắc nét).

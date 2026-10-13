@@ -23,6 +23,7 @@ interface ParsedSheetData {
   links: LinkItem[];
   avatar?: string;
   name?: string;
+  handle?: string;
   bio?: string;
 }
 
@@ -39,6 +40,7 @@ function parseSheetJson(jsonText: string): ParsedSheetData | null {
     const links: LinkItem[] = [];
     let customAvatar: string | undefined;
     let customName: string | undefined;
+    let customHandle: string | undefined;
     let customBio: string | undefined;
 
     for (let i = 0; i < rows.length; i++) {
@@ -62,6 +64,18 @@ function parseSheetJson(jsonText: string): ParsedSheetData | null {
       }
       if (lowerTitle === 'name' || lowerTitle === 'họ và tên' || lowerTitle === 'tên') {
         customName = c[2]?.v?.toString()?.trim() || targetUrl;
+        continue;
+      }
+
+      // 2. Username / Handle configuration row
+      if (lowerId === 'username' || lowerId === 'handle' || lowerId === 'user') {
+        const val = (lowerTitle !== 'username' && lowerTitle !== 'handle' && lowerTitle !== 'user' ? title : '') || c[2]?.v?.toString()?.trim() || targetUrl;
+        customHandle = val ? (val.startsWith('@') ? val : `@${val}`) : '';
+        continue;
+      }
+      if (lowerTitle === 'username' || lowerTitle === 'handle' || lowerTitle === 'tên người dùng') {
+        const val = c[2]?.v?.toString()?.trim() || targetUrl;
+        customHandle = val ? (val.startsWith('@') ? val : `@${val}`) : '';
         continue;
       }
 
@@ -128,6 +142,7 @@ function parseSheetJson(jsonText: string): ParsedSheetData | null {
       links,
       avatar: customAvatar,
       name: customName,
+      handle: customHandle,
       bio: customBio,
     };
   } catch (err) {
@@ -153,7 +168,20 @@ function updateDOM(data: ParsedSheetData) {
     }
   }
 
-  // 3. Update Bio
+  // 3. Update Username / Handle
+  if (data.handle !== undefined) {
+    const handleEl = document.getElementById('header-handle');
+    if (handleEl) {
+      if (data.handle) {
+        handleEl.textContent = data.handle;
+        handleEl.classList.remove('hidden');
+      } else {
+        handleEl.classList.add('hidden');
+      }
+    }
+  }
+
+  // 4. Update Bio
   if (data.bio) {
     const bioEl = document.querySelector<HTMLElement>('header p[data-bilingual]');
     if (bioEl) {

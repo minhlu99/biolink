@@ -28,6 +28,7 @@ interface SheetFetchResult {
   links: LinkItem[];
   avatar?: string;
   name?: string;
+  handle?: string;
   bio?: string;
 }
 
@@ -67,6 +68,7 @@ export async function fetchFromGoogleSheets(sheetId: string): Promise<SheetFetch
     const links: LinkItem[] = [];
     let customAvatar: string | undefined;
     let customName: string | undefined;
+    let customHandle: string | undefined;
     let customBio: string | undefined;
 
     for (let i = 0; i < rows.length; i++) {
@@ -91,6 +93,18 @@ export async function fetchFromGoogleSheets(sheetId: string): Promise<SheetFetch
       }
       if (lowerTitle === 'name' || lowerTitle === 'họ và tên' || lowerTitle === 'tên') {
         customName = c[2]?.v?.toString()?.trim() || targetUrl;
+        continue;
+      }
+
+      // 2. Username / Handle configuration row
+      if (lowerId === 'username' || lowerId === 'handle' || lowerId === 'user') {
+        const val = (lowerTitle !== 'username' && lowerTitle !== 'handle' && lowerTitle !== 'user' ? title : '') || c[2]?.v?.toString()?.trim() || targetUrl;
+        customHandle = val ? (val.startsWith('@') ? val : `@${val}`) : '';
+        continue;
+      }
+      if (lowerTitle === 'username' || lowerTitle === 'handle' || lowerTitle === 'tên người dùng') {
+        const val = c[2]?.v?.toString()?.trim() || targetUrl;
+        customHandle = val ? (val.startsWith('@') ? val : `@${val}`) : '';
         continue;
       }
 
@@ -161,6 +175,7 @@ export async function fetchFromGoogleSheets(sheetId: string): Promise<SheetFetch
       links: links.length > 0 ? links : fallbackLinks,
       avatar: customAvatar,
       name: customName,
+      handle: customHandle,
       bio: customBio,
     };
   } catch (error) {
@@ -181,9 +196,10 @@ export async function getProfileData(): Promise<Profile> {
     return {
       ...profile,
       links: sheetData.links,
-      avatar: sheetData.avatar || profile.avatar,
-      name: sheetData.name || profile.name,
-      bio: sheetData.bio || profile.bio,
+      avatar: sheetData.avatar !== undefined ? sheetData.avatar : profile.avatar,
+      name: sheetData.name !== undefined ? sheetData.name : profile.name,
+      handle: sheetData.handle !== undefined ? sheetData.handle : profile.handle,
+      bio: sheetData.bio !== undefined ? sheetData.bio : profile.bio,
     };
   }
 

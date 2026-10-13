@@ -49,7 +49,12 @@ const { profile } = Astro.props;
   <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 mb-1">
     {profile.name}
   </h1>
-  {profile.handle && <p class="text-sm font-medium text-slate-500 mb-3">{profile.handle}</p>}
+  <p 
+    id="header-handle" 
+    class={`text-sm font-medium text-slate-500 mb-3 ${!profile.handle ? 'hidden' : ''}`}
+  >
+    {profile.handle || ''}
+  </p>
 
   <!-- Bio -->
   {profile.bio && (
