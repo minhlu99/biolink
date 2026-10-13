@@ -44,13 +44,14 @@ export function processUrlAndIcon(rawUrl: string, manualIcon?: string): { url: s
 
   // If user already specified a valid manual non-link icon, respect it unless it's just 'link'
   if (manual && manual !== 'link' && manual !== '') {
-    return { url, icon: manual };
+    const normalizedManual = manual === 'thread' ? 'threads' : manual;
+    return { url, icon: normalizedManual };
   }
 
   // 3. Auto-detect from URL domains
   const lowerUrl = url.toLowerCase();
 
-  if (lowerUrl.includes('threads.net')) return { url, icon: 'threads' };
+  if (lowerUrl.includes('threads.net') || lowerUrl.includes('threads.com')) return { url, icon: 'threads' };
   if (lowerUrl.includes('facebook.com') || lowerUrl.includes('fb.com') || lowerUrl.includes('fb.me')) return { url, icon: 'facebook' };
   if (lowerUrl.includes('tiktok.com')) return { url, icon: 'tiktok' };
   if (lowerUrl.includes('instagram.com') || lowerUrl.includes('instagr.am')) return { url, icon: 'instagram' };
@@ -73,7 +74,7 @@ export function processUrlAndIcon(rawUrl: string, manualIcon?: string): { url: s
 export const iconRegistry: Record<string, IconDefinition> = {
   threads: {
     name: 'Threads',
-    svg: `<path d="M12.186 24c-6.19 0-10.37-4.13-10.37-10.29 0-6.49 4.54-10.87 10.74-10.87 6.36 0 10.32 4.44 10.32 10.43 0 1.25-.16 2.38-.49 3.37h-3.08c.2-.67.31-1.44.31-2.28 0-4.49-2.86-7.8-7.06-7.8-4.32 0-7.39 3.19-7.39 8.15 0 4.8 2.95 7.67 7.02 7.67 3.32 0 5.48-1.77 6.09-4.39h-6.19c-1.92 0-3.32-1.21-3.32-2.89 0-1.8 1.43-2.92 3.49-2.92 1.44 0 2.76.62 3.46 1.7.47-.94 1.24-1.7 2.37-1.7 1.89 0 3.2 1.42 3.2 3.82 0 5.58-4.08 9.8-10.58 9.8zm-.4-7.58c-1.07 0-1.75.56-1.75 1.34 0 .76.66 1.32 1.75 1.32h2.95c-.32-1.57-1.48-2.66-2.95-2.66z"/>`,
+    svg: `<path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098c1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015c-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164c1.43 1.783 3.631 2.698 6.54 2.717c2.623-.02 4.358-.631 5.8-2.045c1.647-1.613 1.618-3.593 1.09-4.798c-.31-.71-.873-1.3-1.634-1.75c-.192 1.352-.622 2.446-1.284 3.272c-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801c-1.063-.694-1.623-1.72-1.623-2.968c0-2.359 1.83-3.626 5.378-3.626h.896v-.615c0-1.849-.933-2.527-2.607-2.527c-.96 0-2.083.33-2.623.905l-1.306-1.378c.883-.933 2.308-1.472 3.929-1.472c2.476 0 4.542 1.157 4.542 4.417v5.992c0 .927.324 1.688.948 2.217c.725.611 1.761.854 3.109.704c1.42-.158 2.617-.872 3.456-2.065c1.11-1.564 1.173-3.955-.176-5.275c-1.63-1.597-4.225-1.921-7.797-1.921h-.963c-1.996 0-3.327.674-3.327 1.954c0 1.056.812 1.644 1.988 1.644c1.666 0 3.323-.744 3.996-2.019c.197-.375.313-.81.33-1.298V9.165h-.933c-3.13 0-4.664 1.258-4.664 3.097c0 1.096.533 1.96 1.545 2.502c.875.47 1.968.614 3.012.399c1.636-.334 2.637-1.503 2.637-3.217v-1.127z"/>`,
     isFillOnly: true,
     brandColor: 'text-black group-hover:text-black',
     bgAccent: 'bg-zinc-100 group-hover:bg-zinc-200 border-zinc-200',
