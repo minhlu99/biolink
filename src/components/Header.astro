@@ -15,6 +15,8 @@ const { profile } = Astro.props;
     <div class="relative w-28 h-28 sm:w-36 sm:h-36 rounded-full overflow-hidden border-4 border-white bg-white shadow-xl shadow-slate-200/60 p-0.5">
       <img
         src={profile.avatar || '/avatar.webp'}
+        srcset={(!profile.avatar || profile.avatar === '/avatar.webp') ? '/avatar-144.webp 144w, /avatar.webp 288w' : undefined}
+        sizes="(max-width: 640px) 112px, 144px"
         alt={profile.name}
         width="144"
         height="144"
@@ -85,6 +87,7 @@ const { profile } = Astro.props;
   <div class="flex items-center gap-2.5">
     <button
       id="btn-share-bio"
+      aria-label="Chia sẻ trang này"
       class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium bg-white hover:bg-slate-50 text-slate-700 border border-slate-200/80 hover:border-slate-300 transition-all shadow-sm active:scale-95 cursor-pointer"
       title="Chia sẻ trang này"
     >
@@ -96,6 +99,7 @@ const { profile } = Astro.props;
 
     <button
       id="btn-open-qr"
+      aria-label="Mở mã QR cá nhân"
       class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium bg-white hover:bg-slate-50 text-slate-700 border border-slate-200/80 hover:border-slate-300 transition-all shadow-sm active:scale-95 cursor-pointer"
       title="Mở mã QR cá nhân"
     >
