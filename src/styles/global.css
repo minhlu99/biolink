@@ -19,24 +19,20 @@
   }
 }
 
-/* Modern Apple / iOS 18 style Liquid Glass (Translucent Frosted Acrylic) */
+/* Modern Apple / iOS 18 style Seamless Liquid Glass (Translucent Frosted Acrylic) */
 .link-card {
   position: relative;
   background: linear-gradient(
     135deg,
-    rgba(255, 255, 255, 0.52) 0%,
-    rgba(255, 255, 255, 0.25) 100%
+    rgba(255, 255, 255, 0.65) 0%,
+    rgba(255, 255, 255, 0.35) 100%
   );
-  backdrop-filter: blur(20px) saturate(190%);
-  -webkit-backdrop-filter: blur(20px) saturate(190%);
-  border: 1px solid rgba(255, 255, 255, 0.75);
-  border-top-color: rgba(255, 255, 255, 0.95);
-  border-bottom-color: rgba(226, 232, 240, 0.45);
+  backdrop-filter: blur(24px) saturate(190%);
+  -webkit-backdrop-filter: blur(24px) saturate(190%);
+  border: none;
   box-shadow: 
-    inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.95),
-    inset 0 -1px 1px 0 rgba(0, 0, 0, 0.02),
-    0 8px 32px -4px rgba(15, 23, 42, 0.06),
-    0 2px 6px -1px rgba(15, 23, 42, 0.02);
+    0 10px 30px -4px rgba(15, 23, 42, 0.05),
+    0 2px 8px -1px rgba(15, 23, 42, 0.02);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
 }
@@ -44,15 +40,12 @@
 .link-card:hover {
   background: linear-gradient(
     135deg,
-    rgba(255, 255, 255, 0.72) 0%,
-    rgba(255, 255, 255, 0.42) 100%
+    rgba(255, 255, 255, 0.82) 0%,
+    rgba(255, 255, 255, 0.50) 100%
   );
-  border-color: rgba(255, 255, 255, 0.95);
-  border-top-color: #ffffff;
   transform: translateY(-2px);
   box-shadow: 
-    inset 0 1px 2px 0 #ffffff,
-    0 16px 36px -4px rgba(59, 130, 246, 0.14),
+    0 16px 36px -4px rgba(59, 130, 246, 0.12),
     0 4px 12px -2px rgba(15, 23, 42, 0.04);
 }
 
@@ -66,8 +59,8 @@
   transition: opacity 0.3s ease;
   background: radial-gradient(
     280px circle at var(--mouse-x, -200px) var(--mouse-y, -200px),
-    rgba(255, 255, 255, 0.9),
-    rgba(224, 242, 254, 0.4) 45%,
+    rgba(255, 255, 255, 0.85),
+    rgba(224, 242, 254, 0.35) 45%,
     transparent 75%
   );
   z-index: 1;
@@ -78,17 +71,22 @@
   opacity: 1;
 }
 
-/* Modern Market Standard Highlight Card with Iridescent Foil */
+/* Modern Seamless Highlight Card with Ambient Aura (Borderless Luxury) */
 .highlight-border-light {
   position: relative;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(245, 243, 255, 0.88) 50%, rgba(254, 249, 235, 0.92) 100%);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.85) 0%,
+    rgba(245, 243, 255, 0.65) 50%,
+    rgba(254, 249, 235, 0.70) 100%
+  );
+  backdrop-filter: blur(24px) saturate(190%);
+  -webkit-backdrop-filter: blur(24px) saturate(190%);
+  border: none;
   border-radius: 1rem;
   box-shadow: 
-    inset 0 1px 2px 0 rgba(255, 255, 255, 1),
-    0 6px 24px -2px rgba(99, 102, 241, 0.16),
-    0 2px 8px -1px rgba(236, 72, 153, 0.12);
+    0 12px 36px -4px rgba(99, 102, 241, 0.18),
+    0 4px 14px -2px rgba(236, 72, 153, 0.12);
   animation: highlightGentleFloat 4s ease-in-out infinite alternate;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
@@ -97,49 +95,24 @@
 .highlight-border-light:hover {
   transform: translateY(-4px) scale(1.01);
   box-shadow: 
-    inset 0 1px 2px 0 rgba(255, 255, 255, 1),
-    0 16px 36px -4px rgba(99, 102, 241, 0.28),
-    0 8px 18px -2px rgba(236, 72, 153, 0.20);
+    0 20px 42px -4px rgba(99, 102, 241, 0.28),
+    0 8px 20px -2px rgba(236, 72, 153, 0.20);
 }
 
-/* 1. Animated Iridescent Border */
-.highlight-border-light::before {
-  content: '';
-  position: absolute;
-  inset: -1.5px;
-  border-radius: 1.08rem;
-  padding: 2px;
-  background: linear-gradient(
-    135deg,
-    #6366f1 0%,
-    #a855f7 25%,
-    #ec4899 50%,
-    #3b82f6 75%,
-    #6366f1 100%
-  );
-  background-size: 300% 300%;
-  animation: highlightBorderCycle 4s ease infinite;
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* 2. Soft Pulsing Ambient Backlight Flare / Underglow */
+/* Soft Pulsing Ambient Backlight Flare / Underglow (No hard border outline) */
 .highlight-border-light::after {
   content: '';
   position: absolute;
-  inset: -2px;
-  border-radius: 1.15rem;
+  inset: -3px;
+  border-radius: 1.25rem;
   background: linear-gradient(
     135deg,
-    rgba(99, 102, 241, 0.45),
-    rgba(236, 72, 153, 0.40),
-    rgba(59, 130, 246, 0.45)
+    rgba(99, 102, 241, 0.40),
+    rgba(236, 72, 153, 0.35),
+    rgba(59, 130, 246, 0.40)
   );
   background-size: 300% 300%;
-  filter: blur(12px);
+  filter: blur(16px);
   opacity: 0.65;
   animation: highlightBorderCycle 4s ease infinite, highlightGlowBreathe 3s ease-in-out infinite alternate;
   z-index: -1;

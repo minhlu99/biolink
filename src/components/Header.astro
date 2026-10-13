@@ -33,25 +33,6 @@ const { profile } = Astro.props;
       />
     </div>
 
-    <!-- Verified Rosette Seal on Avatar -->
-    {profile.verified && (
-      <div 
-        class="absolute bottom-1 right-1 p-0.5 rounded-full bg-white shadow-md shadow-blue-500/25 flex items-center justify-center z-10 transform group-hover:scale-110 transition-transform duration-300 ring-2 ring-white"
-        title="Đã xác minh"
-      >
-        <svg class="w-4 h-4 sm:w-4.5 sm:h-4.5" viewBox="0 0 24 24" fill="none">
-          <path fill="url(#avatar-verified-seal)" d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.79-4-4-4-.495 0-.965.084-1.4.238C14.55 2.475 13.18 1.6 11.6 1.6c-1.58 0-2.95.875-3.6 2.148-.435-.154-.905-.238-1.4-.238-2.21 0-4 1.79-4 4 0 .495.084.965.238 1.4C1.575 10.45.7 11.82.7 13.4c0 1.58.875 2.95 2.148 3.6-.154.435-.238.905-.238 1.4 0 2.21 1.79 4 4 4 .495 0 .965-.084 1.4-.238 1.247 1.273 2.617 2.148 4.19 2.148 1.58 0 2.95-.875 3.6-2.148.435.154.905.238 1.4.238 2.21 0 4-1.79 4-4 0-.495-.084-.965-.238-1.4 1.273-1.25 2.148-2.62 2.148-4.2z" />
-          <path fill="#ffffff" d="M9.8 16.6l-3.9-3.9 1.4-1.4 2.5 2.5 6.5-6.5 1.4 1.4-7.9 7.9z" />
-          <defs>
-            <linearGradient id="avatar-verified-seal" x1="1" y1="1" x2="23" y2="23" gradientUnits="userSpaceOnUse">
-              <stop stop-color="#38bdf8"/>
-              <stop offset="0.5" stop-color="#2563eb"/>
-              <stop offset="1" stop-color="#1d4ed8"/>
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
-    )}
   </div>
 
   <!-- Live Status Badge (if available) -->
@@ -78,22 +59,27 @@ const { profile } = Astro.props;
         aria-label="Tài khoản chính chủ đã xác minh"
       >
         <svg 
-          class="w-5 h-5 sm:w-6 sm:h-6 drop-shadow-[0_2px_8px_rgba(37,99,235,0.45)]" 
+          class="w-5 h-5 sm:w-6 sm:h-6 drop-shadow-[0_2px_8px_rgba(37,99,235,0.4)]" 
           viewBox="0 0 24 24" 
           fill="none"
         >
+          <!-- Authentic 8-point symmetrical rosette seal -->
           <path 
             fill="url(#name-verified-seal)" 
-            d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.79-4-4-4-.495 0-.965.084-1.4.238C14.55 2.475 13.18 1.6 11.6 1.6c-1.58 0-2.95.875-3.6 2.148-.435-.154-.905-.238-1.4-.238-2.21 0-4 1.79-4 4 0 .495.084.965.238 1.4C1.575 10.45.7 11.82.7 13.4c0 1.58.875 2.95 2.148 3.6-.154.435-.238.905-.238 1.4 0 2.21 1.79 4 4 4 .495 0 .965-.084 1.4-.238 1.247 1.273 2.617 2.148 4.19 2.148 1.58 0 2.95-.875 3.6-2.148.435.154.905.238 1.4.238 2.21 0 4-1.79 4-4 0-.495-.084-.965-.238-1.4 1.273-1.25 2.148-2.62 2.148-4.2z" 
+            d="M22.25 12c0-1.43-.88-2.67-2.19-3.21.2-1.41-.35-2.83-1.47-3.79s-2.58-1.22-3.97-.68C13.88 3.1 12.56 2.5 11.16 2.5s-2.72.6-3.46 1.82c-1.39-.54-2.85-.28-3.97.68S2.08 7.36 2.28 8.79C.97 9.33.09 10.57.09 12s.88 2.67 2.19 3.21c-.2 1.41.35 2.83 1.47 3.79s2.58 1.22 3.97.68c.74 1.22 2.06 1.82 3.46 1.82s2.72-.6 3.46-1.82c1.39.54 2.85.28 3.97-.68s1.67-2.38 1.47-3.79c1.31-.54 2.19-1.78 2.19-3.21z"
           />
+          <!-- Centered, beautifully proportioned rounded checkmark -->
           <path 
-            fill="#ffffff" 
-            d="M9.8 16.6l-3.9-3.9 1.4-1.4 2.5 2.5 6.5-6.5 1.4 1.4-7.9 7.9z" 
+            d="M8.2 12.2l2.6 2.6 5.4-5.6" 
+            stroke="#ffffff" 
+            stroke-width="2.3" 
+            stroke-linecap="round" 
+            stroke-linejoin="round"
           />
           <defs>
-            <linearGradient id="name-verified-seal" x1="1" y1="1" x2="23" y2="23" gradientUnits="userSpaceOnUse">
+            <linearGradient id="name-verified-seal" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
               <stop stop-color="#38bdf8"/>
-              <stop offset="0.5" stop-color="#2563eb"/>
+              <stop offset="0.6" stop-color="#2563eb"/>
               <stop offset="1" stop-color="#1d4ed8"/>
             </linearGradient>
           </defs>
